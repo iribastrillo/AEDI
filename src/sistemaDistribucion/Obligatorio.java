@@ -34,7 +34,21 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno agregarCliente(String nombre, String rut, int tel, String direccion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Retorno ret = new Retorno(Retorno.Resultado.OK);
+        
+        Cliente c = new Cliente(nombre,rut,tel,direccion);
+        NodoLista cl = new NodoLista(c);
+        
+        if(s.listaClientes.esVacia()) {
+            s.listaClientes.agregarInicio(cl);
+        } else if(s.listaClientes.pertenece(c)){
+            ret = new Retorno(Retorno.Resultado.ERROR_1);
+        } else {
+            s.listaClientes.agregarFinal(cl);
+        }
+        
+        
+        return ret;
     }
 
     @Override
