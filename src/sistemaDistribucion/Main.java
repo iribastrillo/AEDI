@@ -2,6 +2,7 @@
 package sistemaDistribucion;
 
 import Entidades.Cliente;
+import Entidades.Camion;
 import TADs.NodoLista;
 import java.text.ParseException;
 
@@ -16,14 +17,20 @@ public class Main {
         
         obl.getS().getListaClientes().mostrarInversoREC(obl.getS().getListaClientes().getInicio());
         
+        System.out.println("--------------------------------------------------");
+
         NodoLista nl = obl.getS().getListaClientes().obtenerElemento(new NodoLista(new Cliente("1253")));
-                        System.out.println("-------------");
+        System.out.println("--------------------------------------------------");
         System.out.println("" + nl.getDato().equals(nl.getDato()));
-                System.out.println("-------------");
+        
+        System.out.println("--------------------------------------------------");
 
         obl.eliminarCliente("1253");
         
         obl.getS().getListaClientes().mostrar();
+        
+        System.out.println("--------------------------------------------------");
+        obl.getS().getListaCamiones().mostrar();
     }
         public static void juegodeprueba2(Obligatorio obl, Prueba p) throws ParseException {
         // escriba su juego de prueba aqui

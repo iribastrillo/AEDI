@@ -47,6 +47,15 @@ public class Camion implements Comparable<Camion> {
 
     @Override
     public int compareTo(Camion o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.matricula.compareTo(o.matricula);
+    }
+    
+    public boolean equals(Object o) {
+        Camion camion = (Camion) o;
+        return this.matricula.compareTo(camion.matricula) == 0;
+    }
+    
+    public String toString() {
+        return this.matricula + " - " + this.toneladasMaxSoportadas + "kg";
     }
 }

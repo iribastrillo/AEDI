@@ -5,6 +5,7 @@
 package sistemaDistribucion;
 
 import Entidades.Cliente;
+import Entidades.Camion;
 import TADs.NodoLista;
 import Entidades.Camion;
 
@@ -47,6 +48,12 @@ public class Obligatorio  implements IObligatorio{
         this.agregarCliente("Ignacio","12345",1234,"Direccion");
         this.agregarCliente("Carmen","123456",1234,"Direccion");
         
+        this.agregarCamion("AAV4543", 10);
+        this.agregarCamion("AAV4543", 15);
+        this.agregarCamion("AAK4543", 10);
+
+
+        
         return new Retorno (Retorno.Resultado.OK);
     }
 
@@ -86,16 +93,21 @@ public class Obligatorio  implements IObligatorio{
     @Override
     public Retorno agregarCamion(String matricula, int toneladasMaxSoportadas) {
         
+        if(toneladasMaxSoportadas <= 0){
+            return new Retorno(Retorno.Resultado.ERROR_2);
+        }
+        
         Camion c = new Camion(matricula, toneladasMaxSoportadas);
         NodoLista cl = new NodoLista(c);
         
         if(getS().getListaCamiones().esVacia()) {
             getS().getListaCamiones().agregarInicio(cl);
         } else if(getS().getListaCamiones().pertenece(c)){
-            
+            return new Retorno(Retorno.Resultado.ERROR_1);
+        } else {
+            getS().getListaCamiones().agregarOrd(cl);
         }
-        return new Retorno(Retorno.Resultado.ERROR_1);
-        //Hay que hacerlo bien.
+        return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override
