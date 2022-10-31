@@ -126,12 +126,12 @@ public class Lista<T extends Comparable<T>> implements ILista<T>{
     @Override
     public void agregarOrd(NodoLista nodo){
         //lista vacía o primer elemento es mayor o igual => agrego al ppio
-        if (this.esVacia() || this.inicio.getDato().compareTo(nodo.getDato())>=0 ){
+        if (this.esVacia() || this.inicio.getDato().compareTo(nodo.getDato())== -1 ){
             this.agregarInicio(nodo);
             return;
         }
         NodoLista aux=this.inicio;
-        while (aux!=this.fin && aux.getSig().getDato().compareTo(nodo.getDato())==-1){
+        while (aux!=this.fin && aux.getSig().getDato().compareTo(nodo.getDato())>=0){
             aux=aux.getSig();
         }
         if (aux!=fin){
@@ -149,7 +149,7 @@ public class Lista<T extends Comparable<T>> implements ILista<T>{
         if (this.esVacia()){
             return;
         }
-        if (this.inicio.getDato()==nodo.getDato()){
+        if (this.inicio.getDato().equals(nodo.getDato())){
             this.borrarInicio();
             return;
         }
@@ -159,6 +159,7 @@ public class Lista<T extends Comparable<T>> implements ILista<T>{
         }
         
         NodoLista aux=this.inicio;
+       
         while (aux.getSig()!=null && aux.getSig().getDato().compareTo(nodo.getDato()) != 0)
             aux=aux.getSig();
         //lo encontré o llegué al final de la lista

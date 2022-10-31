@@ -59,4 +59,11 @@ public class Cliente implements Comparable<Cliente>{
     public String toString(){
       return "Nombre:" + this.getNombre();
     }    
+    
+    @Override
+    public boolean equals(Object o) {
+        Cliente cliente = (Cliente) o;
+        return this.rut.compareTo(cliente.rut) == 0;
+    }
+
 }

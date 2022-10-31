@@ -11,12 +11,14 @@ public class Sistema {
     
     private Lista listaClientes;
     private Lista listaEnvios;
+    private Lista listaCamiones;
     private int capacidadMaxima;
     
     public  Sistema(int capacidadCajas){
         this.listaClientes = new Lista();
         this.listaEnvios = new Lista();
         this.capacidadMaxima = capacidadCajas;
+        this.listaCamiones = new Lista();
     }
     /**
      * @return the listaClientes
@@ -58,6 +60,19 @@ public class Sistema {
     public void setListaEnvios(Lista listaEnvios) {
         this.listaEnvios = listaEnvios;
     }    
+        /**
+     * @return the listaCamiones
+     */
+    public Lista getListaCamiones() {
+        return listaCamiones;
+    }
+
+    /**
+     * @param listaCamiones the listaCamiones to set
+     */
+    public void setListaCamiones(Lista listaCamiones) {
+        this.listaCamiones = listaCamiones;
+    }
     
     public boolean tieneEntregas (Cliente cliente) {
         boolean ok = false;

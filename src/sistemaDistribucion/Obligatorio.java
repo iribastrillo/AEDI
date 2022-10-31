@@ -6,6 +6,7 @@ package sistemaDistribucion;
 
 import Entidades.Cliente;
 import TADs.NodoLista;
+import Entidades.Camion;
 
 /**
  *
@@ -35,15 +36,16 @@ public class Obligatorio  implements IObligatorio{
             return new Retorno (Retorno.Resultado.ERROR_1);
         }
         this.setS(new Sistema(cantidadmaxima));
-        Cliente c = new Cliente("Pepe","1253",1234,"Direccion");
-        Cliente c1 = new Cliente("Pepe1","1234",1234,"Direccion");
-        Cliente c2 = new Cliente("Pepe2","12345",1234,"Direccion");
-        Cliente c3 = new Cliente("Pepe3","123456",1234,"Direccion");
+//        Cliente c = new Cliente("Pepe","1253",1234,"Direccion");
+//        Cliente c1 = new Cliente("Pepe1","1234",1234,"Direccion");
+//        Cliente c2 = new Cliente("Pepe2","12345",1234,"Direccion");
+//        Cliente c3 = new Cliente("Pepe3","123456",1234,"Direccion");
         
-        getS().getListaClientes().agregarInicio(new NodoLista(c));
-        getS().getListaClientes().agregarInicio(new NodoLista(c1));
-        getS().getListaClientes().agregarInicio(new NodoLista(c2));
-        getS().getListaClientes().agregarInicio(new NodoLista(c3));
+        this.agregarCliente("Adolfo","1253",1234,"Direccion");
+        this.agregarCliente("Gonzalo","1234",1234,"Direccion");
+        this.agregarCliente("Bautista","1234",1234,"Direccion");
+        this.agregarCliente("Ignacio","12345",1234,"Direccion");
+        this.agregarCliente("Carmen","123456",1234,"Direccion");
         
         return new Retorno (Retorno.Resultado.OK);
     }
@@ -60,7 +62,7 @@ public class Obligatorio  implements IObligatorio{
         } else if(getS().getListaClientes().pertenece(c)){
             ret = new Retorno(Retorno.Resultado.ERROR_1);
         } else {
-            getS().getListaClientes().agregarFinal(cl);
+            getS().getListaClientes().agregarOrd(cl);
         }  
         return ret;
     }
@@ -83,7 +85,16 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno agregarCamion(String matricula, int toneladasMaxSoportadas) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        Camion c = new Camion(matricula, toneladasMaxSoportadas);
+        NodoLista cl = new NodoLista(c);
+        
+        if(getS().getListaCamiones().esVacia()) {
+            getS().getListaCamiones().agregarInicio(cl);
+        } else if(getS().getListaCamiones().pertenece(c)){
+            
+        }
+        return new Retorno(Retorno.Resultado.ERROR_1);
     }
 
     @Override

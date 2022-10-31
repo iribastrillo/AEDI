@@ -14,7 +14,7 @@ public class Main {
         juegodeprueba2(obl, p);
         
         
-        obl.getS().getListaClientes().mostrar();
+        obl.getS().getListaClientes().mostrarInversoREC(obl.getS().getListaClientes().getInicio());
         
         NodoLista nl = obl.getS().getListaClientes().obtenerElemento(new NodoLista(new Cliente("1253")));
                         System.out.println("-------------");
