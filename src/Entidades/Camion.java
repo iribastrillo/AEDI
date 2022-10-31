@@ -16,6 +16,10 @@ public class Camion implements Comparable<Camion> {
         this.matricula = matricula;
         this.toneladasMaxSoportadas = toneladas;
     }
+    
+    public Camion(String matricula) {
+        this.matricula = matricula;
+    }
     /**
      * @return the matricula
      */

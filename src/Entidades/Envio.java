@@ -9,13 +9,16 @@ package Entidades;
  * @author Admin
  */
 public class Envio {
+
     
+    private Camion camion;
     private Cliente cliente;
     private int cantidad;
 
-    public Envio (Cliente cliente, int cantidad) {
+    public Envio (Cliente cliente, int cantidad, Camion camion) {
         this.cliente = cliente;
         this.cantidad = cantidad;
+        this.camion = camion;
     }
     /**
      * @return the cliente
@@ -43,5 +46,19 @@ public class Envio {
      */
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    } 
+    }
+    /**
+     * @return the camion
+     */
+    public Camion getCamion() {
+        return camion;
+    }
+
+    /**
+     * @param camion the camion to set
+     */
+    public void setCamion(Camion camion) {
+        this.camion = camion;
+    }
+
 }

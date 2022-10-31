@@ -51,6 +51,9 @@ public class Obligatorio  implements IObligatorio{
         this.agregarCamion("AAV4543", 10);
         this.agregarCamion("AAV4543", 15);
         this.agregarCamion("AAK4543", 10);
+        this.eliminarCamion("AAV4543");
+        this.agregarCamion("AAA1111", 1);
+        this.agregarCamion("AAA1000", -1);
 
 
         
@@ -112,7 +115,19 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno eliminarCamion(String matricula) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Camion c = new Camion(matricula);
+        NodoLista cNl = new NodoLista(c);
+        
+        NodoLista aux = this.getS().getListaCamiones().obtenerElemento(cNl);
+        if(aux == null) {
+            return new Retorno(Retorno.Resultado.ERROR_1);
+        }
+        if(getS().tieneEntregas(c)){
+            return new Retorno(Retorno.Resultado.ERROR_2);
+        }
+        this.getS().getListaCamiones().borrarElemento(aux);
+        return new Retorno(Retorno.Resultado.OK);  
+        
     }
 
     @Override

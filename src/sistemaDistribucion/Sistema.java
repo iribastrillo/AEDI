@@ -1,6 +1,7 @@
 
 package sistemaDistribucion;
 
+import Entidades.Camion;
 import TADs.Lista;
 import Entidades.Cliente;
 import Entidades.Envio;
@@ -83,6 +84,21 @@ public class Sistema {
         while (!ok) {
             Envio envio = (Envio) aux.getDato();
             if (envio.getCliente().compareTo(cliente) == 0) {
+                ok = true;
+            }
+        }
+        return ok;
+    }
+    
+    public boolean tieneEntregas(Camion camion) {
+        boolean ok = false;
+        NodoLista aux = this.listaEnvios.getInicio();
+        if(aux == null){
+            return false;
+        }
+        while(!ok) {
+            Envio envio = (Envio) aux.getDato();
+            if(envio.getCamion().compareTo(camion) == 0) {
                 ok = true;
             }
         }
