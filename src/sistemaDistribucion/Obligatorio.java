@@ -95,6 +95,7 @@ public class Obligatorio  implements IObligatorio{
             
         }
         return new Retorno(Retorno.Resultado.ERROR_1);
+        //Hay que hacerlo bien.
     }
 
     @Override
