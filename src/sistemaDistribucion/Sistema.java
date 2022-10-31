@@ -62,6 +62,9 @@ public class Sistema {
     public boolean tieneEntregas (Cliente cliente) {
         boolean ok = false;
         NodoLista aux = this.listaEnvios.getInicio();
+        if(aux == null) {
+            return false;
+        }
         while (!ok) {
             Envio envio = (Envio) aux.getDato();
             if (envio.getCliente().compareTo(cliente) == 0) {

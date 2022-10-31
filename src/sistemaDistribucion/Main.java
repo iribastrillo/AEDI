@@ -13,9 +13,17 @@ public class Main {
         Prueba p = new Prueba();
         juegodeprueba2(obl, p);
         
+        
+        obl.getS().getListaClientes().mostrar();
+        
+        NodoLista nl = obl.getS().getListaClientes().obtenerElemento(new NodoLista(new Cliente("1253")));
+                        System.out.println("-------------");
+        System.out.println("" + nl.getDato().equals(nl.getDato()));
+                System.out.println("-------------");
+
         obl.eliminarCliente("1253");
         
-        obl.getS().getListaEnvios().mostrar();
+        obl.getS().getListaClientes().mostrar();
     }
         public static void juegodeprueba2(Obligatorio obl, Prueba p) throws ParseException {
         // escriba su juego de prueba aqui

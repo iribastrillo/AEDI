@@ -159,7 +159,7 @@ public class Lista<T extends Comparable<T>> implements ILista<T>{
         }
         
         NodoLista aux=this.inicio;
-        while (aux.getSig()!=null && aux.getSig().getDato() != nodo.getDato())
+        while (aux.getSig()!=null && aux.getSig().getDato().compareTo(nodo.getDato()) != 0)
             aux=aux.getSig();
         //lo encontré o llegué al final de la lista
         if (aux.getSig()!=null){
@@ -189,7 +189,7 @@ public class Lista<T extends Comparable<T>> implements ILista<T>{
     @Override
     public NodoLista obtenerElemento(NodoLista nodo){
         NodoLista aux=this.inicio;
-        while (aux!=null && aux.getDato()!=nodo.getDato())
+        while (aux!=null && aux.getDato().compareTo(nodo.getDato()) != 0)
             aux=aux.getSig();
         //encontré dato o llegué al final
         return aux;
