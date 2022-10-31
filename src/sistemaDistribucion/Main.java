@@ -11,8 +11,11 @@ public class Main {
         
         Obligatorio obl = new Obligatorio();
         Prueba p = new Prueba();
-        juegodeprueba2(obl, p);        
+        juegodeprueba2(obl, p);
         
+        obl.eliminarCliente("1253");
+        
+        obl.getS().getListaEnvios().mostrar();
     }
         public static void juegodeprueba2(Obligatorio obl, Prueba p) throws ParseException {
         // escriba su juego de prueba aqui

@@ -13,7 +13,10 @@ public class Cliente implements Comparable<Cliente>{
         this.rut = rut;
         this.tel = tel;
         this.direccion= direccion;
-        
+    }
+    
+    public Cliente (String rut) {
+        this.rut = rut;
     }
 
 
@@ -51,7 +54,7 @@ public class Cliente implements Comparable<Cliente>{
 
     @Override
     public int compareTo(Cliente o) {
-        return Integer.valueOf(rut);
+        return this.rut.compareTo(o.rut);
     }
     public String toString(){
       return "Nombre:" + this.getNombre();

@@ -9,27 +9,43 @@ import TADs.NodoLista;
 
 /**
  *
- * @author Felipe
+ * @author Pérez, G. 249454 ; Ribas, I. 242158
  */
 public class Obligatorio  implements IObligatorio{
 
     private Sistema s;
     
+    /**
+     * @return the s
+     */
+    public Sistema getS() {
+        return s;
+    }
+
+    /**
+     * @param s the s to set
+     */
+    public void setS(Sistema s) {
+        this.s = s;
+    }
+    
     @Override
-    public Retorno crearSistemaDeDistribucion(int cantidadmaxima) {
-        Retorno ret = new Retorno(Retorno.Resultado.OK);
-        this.s = new Sistema();
-        
+    public Retorno crearSistemaDeDistribucion(int cantidadmaxima) {        
+        if (cantidadmaxima <= 0) {
+            return new Retorno (Retorno.Resultado.ERROR_1);
+        }
+        this.setS(new Sistema(cantidadmaxima));
         Cliente c = new Cliente("Pepe","1253",1234,"Direccion");
-        Cliente c1 = new Cliente("Pepe1","1253",1234,"Direccion");
-        Cliente c2 = new Cliente("Pepe2","1253",1234,"Direccion");
-        Cliente c3 = new Cliente("Pepe3","1253",1234,"Direccion");
-        s.listaClientes.agregarInicio(new NodoLista(c));
-        s.listaClientes.agregarInicio(new NodoLista(c1));
-        s.listaClientes.agregarInicio(new NodoLista(c2));
-        s.listaClientes.agregarInicio(new NodoLista(c3));
+        Cliente c1 = new Cliente("Pepe1","1234",1234,"Direccion");
+        Cliente c2 = new Cliente("Pepe2","12345",1234,"Direccion");
+        Cliente c3 = new Cliente("Pepe3","123456",1234,"Direccion");
         
-        return ret;
+        getS().getListaClientes().agregarInicio(new NodoLista(c));
+        getS().getListaClientes().agregarInicio(new NodoLista(c1));
+        getS().getListaClientes().agregarInicio(new NodoLista(c2));
+        getS().getListaClientes().agregarInicio(new NodoLista(c3));
+        
+        return new Retorno (Retorno.Resultado.OK);
     }
 
     @Override
@@ -39,21 +55,30 @@ public class Obligatorio  implements IObligatorio{
         Cliente c = new Cliente(nombre,rut,tel,direccion);
         NodoLista cl = new NodoLista(c);
         
-        if(s.listaClientes.esVacia()) {
-            s.listaClientes.agregarInicio(cl);
-        } else if(s.listaClientes.pertenece(c)){
+        if(getS().getListaClientes().esVacia()) {
+            getS().getListaClientes().agregarInicio(cl);
+        } else if(getS().getListaClientes().pertenece(c)){
             ret = new Retorno(Retorno.Resultado.ERROR_1);
         } else {
-            s.listaClientes.agregarFinal(cl);
-        }
-        
-        
+            getS().getListaClientes().agregarFinal(cl);
+        }  
         return ret;
     }
 
     @Override
     public Retorno eliminarCliente(String rut) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Cliente cliente = new Cliente (rut);
+        NodoLista nodo = new NodoLista(cliente);
+        NodoLista nodoCliente = this.getS().getListaClientes().obtenerElemento(nodo);
+        
+        if (nodoCliente == null) {
+            return new Retorno (Retorno.Resultado.ERROR_1);
+        }
+        if (this.getS().tieneEntregas(cliente)) {
+            return new Retorno (Retorno.Resultado.ERROR_2);
+        }
+        this.getS().getListaClientes().borrarElemento(nodo);
+        return new Retorno (Retorno.Resultado.OK);
     }
 
     @Override
@@ -89,7 +114,7 @@ public class Obligatorio  implements IObligatorio{
     @Override
     public Retorno listarClientesOrdenado() {
         Retorno ret = new Retorno(Retorno.Resultado.OK);
-        s.listaClientes.mostrar();
+        getS().getListaClientes().mostrar();
         return ret;
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
