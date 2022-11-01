@@ -47,13 +47,14 @@ public class Obligatorio  implements IObligatorio{
         this.agregarCliente("Bautista","1234",1234,"Direccion");
         this.agregarCliente("Ignacio","12345",1234,"Direccion");
         this.agregarCliente("Carmen","123456",1234,"Direccion");
-        
+        this.listarCamiones();
         this.agregarCamion("AAV4543", 10);
         this.agregarCamion("AAV4543", 15);
         this.agregarCamion("AAK4543", 10);
         this.eliminarCamion("AAV4543");
         this.agregarCamion("AAA1111", 1);
         this.agregarCamion("AAA1000", -1);
+        this.listarCamiones();
 
 
         
@@ -147,7 +148,8 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarCamiones() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.getS().getListaCamiones().mostrar();
+        return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override
