@@ -10,4 +10,6 @@ package Entidades;
  */
 public class Producto {
     
+    private String producto;
+    private String descripcion;
 }
