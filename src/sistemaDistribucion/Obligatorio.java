@@ -8,6 +8,7 @@ import Entidades.Cliente;
 import TADs.NodoLista;
 import Entidades.Camion;
 import Entidades.Producto;
+import TADs.Lista;
 
 /**
  *
@@ -58,8 +59,9 @@ public class Obligatorio  implements IObligatorio{
         this.registrarProducto("1428", "Pan Marbella Lactal 550g", "Pan lacteado en fetas");
         this.registrarProducto("1429", "Pan Marbella Ingegral 550g", "Pan lacteado en fetas");
         this.registrarProducto("1429", "Pan Marbella Ingegral 550g", "Pan integral en fetas");
-        this.listarProductos();
-
+        //this.listarProductos();
+        System.out.println("-------ULTIMO PRODUCTO-------");
+        this.ultimoProductoRegistrado();
 
         
         return new Retorno (Retorno.Resultado.OK);
@@ -181,13 +183,18 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarProductos() {
-        this.getS().getListaProductos().mostrar();
-        return new Retorno(Retorno.Resultado.OK);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Retorno ultimoProductoRegistrado() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Producto ultP = (Producto) this.getS().getListaProductos().getFin().getDato();
+        NodoLista ultPNl = new NodoLista(ultP);
+        Lista aux = new Lista();
+        aux.agregarInicio(ultPNl);
+        aux.mostrar();
+        
+        return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override
