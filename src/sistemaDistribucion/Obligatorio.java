@@ -8,6 +8,7 @@ import Entidades.Cliente;
 import Entidades.Camion;
 import TADs.NodoLista;
 import Entidades.Camion;
+import Entidades.Producto;
 
 /**
  *
@@ -132,9 +133,21 @@ public class Obligatorio  implements IObligatorio{
     }
 
     @Override
-    public Retorno registrarProducto(String código, String nombre, String descripcion) {
+    public Retorno registrarProducto(String codigo, String nombre, String descripcion) {
+        Producto p = new Producto(codigo, nombre, descripcion);
+        NodoLista pNl = new NodoLista(p);
         
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(descripcion == "") {
+            return new Retorno(Retorno.Resultado.ERROR_2);
+        }
+        if(getS().getListaProductos().getInicio().getDato() == null) {
+            getS().getListaProductos().setInicio(pNl);
+        } else if(getS().getListaProductos().pertenece(p)){
+            return new Retorno(Retorno.Resultado.ERROR_1);
+        } else {
+            getS().getListaProductos().agregarOrd(pNl);
+        }
+        return new Retorno(Retorno.Resultado.OK);        
     }
 
     @Override
