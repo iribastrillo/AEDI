@@ -133,6 +133,7 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno registrarProducto(String código, String nombre, String descripcion) {
+        
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
