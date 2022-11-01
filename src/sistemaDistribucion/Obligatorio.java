@@ -5,7 +5,6 @@
 package sistemaDistribucion;
 
 import Entidades.Cliente;
-import Entidades.Camion;
 import TADs.NodoLista;
 import Entidades.Camion;
 import Entidades.Producto;
@@ -56,6 +55,10 @@ public class Obligatorio  implements IObligatorio{
         this.agregarCamion("AAA1111", 1);
         this.agregarCamion("AAA1000", -1);
         this.listarCamiones();
+        this.registrarProducto("1428", "Pan Marbella Lactal 550g", "Pan lacteado en fetas");
+        this.registrarProducto("1429", "Pan Marbella Ingegral 550g", "Pan lacteado en fetas");
+        this.registrarProducto("1429", "Pan Marbella Ingegral 550g", "Pan integral en fetas");
+        this.listarProductos();
 
 
         
@@ -134,18 +137,20 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno registrarProducto(String codigo, String nombre, String descripcion) {
-        Producto p = new Producto(codigo, nombre, descripcion);
-        NodoLista pNl = new NodoLista(p);
         
         if(descripcion == "") {
             return new Retorno(Retorno.Resultado.ERROR_2);
         }
-        if(getS().getListaProductos().getInicio().getDato() == null) {
-            getS().getListaProductos().setInicio(pNl);
+        
+        Producto p = new Producto(codigo, nombre, descripcion);
+        NodoLista pNl = new NodoLista(p);
+        
+        if(getS().getListaProductos().esVacia()) {
+            getS().getListaProductos().agregarInicio(pNl);
         } else if(getS().getListaProductos().pertenece(p)){
             return new Retorno(Retorno.Resultado.ERROR_1);
         } else {
-            getS().getListaProductos().agregarOrd(pNl);
+            this.getS().getListaProductos().agregarOrd(pNl);
         }
         return new Retorno(Retorno.Resultado.OK);        
     }
@@ -176,7 +181,8 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.getS().getListaProductos().mostrar();
+        return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override

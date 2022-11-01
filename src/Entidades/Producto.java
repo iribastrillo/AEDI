@@ -68,4 +68,17 @@ public class Producto implements Comparable<Producto> {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        Producto producto = (Producto) o;
+        return this.nombre.compareTo(producto.nombre) == 0;
+    }
+
+    
+    
+    public String toString(){
+      return "Producto: " + this.getCodigo() + " - " + this.getNombre() + " / " + this.getDescripcion();
+    }    
+    
 }
