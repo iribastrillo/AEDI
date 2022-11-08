@@ -9,12 +9,13 @@ import TADs.NodoLista;
 
 
 public class Sistema {
-    
+   
     private Lista listaClientes;
     private Lista listaEnvios;
     private Lista listaCamiones;
     private int capacidadMaxima;
     private Lista listaProductos;
+    private Lista listaStock;
     
     public  Sistema(int capacidadCajas){
         this.listaClientes = new Lista();
@@ -22,6 +23,7 @@ public class Sistema {
         this.capacidadMaxima = capacidadCajas;
         this.listaCamiones = new Lista();
         this.listaProductos = new Lista();
+        this.listaStock = new Lista();
     }
     /**
      * @return the listaClientes
@@ -120,4 +122,19 @@ public class Sistema {
     public void setListaProductos(Lista listaProductos) {
         this.listaProductos = listaProductos;
     }
+
+   /**
+     * @return the listaStock
+     */
+    public Lista getListaStock() {
+        return listaStock;
+    }
+
+    /**
+     * @param listaStock the listaStock to set
+     */
+    public void setListaStock(Lista listaStock) {
+        this.listaStock = listaStock;
+    }
+ 
 }

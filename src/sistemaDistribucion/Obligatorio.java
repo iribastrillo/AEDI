@@ -4,6 +4,7 @@
  */
 package sistemaDistribucion;
 
+import Entidades.Caja;
 import Entidades.Cliente;
 import TADs.NodoLista;
 import Entidades.Camion;
@@ -159,7 +160,42 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno altaDeStockDeProducto(String matriculaCamion, int codigoProd, int nroCaja, int cantUnidades) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(cantUnidades <= 0) {
+            return new Retorno(Retorno.Resultado.ERROR_3);
+        }
+        
+        if(!this.getS().getListaCamiones().pertenece(matriculaCamion)){
+            return new Retorno(Retorno.Resultado.ERROR_1);
+        }
+        
+        if(!existeProducto(codigoProd)){
+            return new Retorno(Retorno.Resultado.ERROR_2);
+        }
+        
+        if(this.getS().getCapa)
+        
+        if(!this.getS().getListaStock().esVacia()) {
+            Caja c = new Caja(nroCaja);
+            if(this.getS().getListaStock().pertenece(c)){
+                return new Retorno(Retorno.Resultado.ERROR_4);
+            }
+
+        } else {
+        }
+    }
+    
+    
+    public boolean existeProducto(int codigoProd) {
+        Lista productos = this.getS().getListaProductos();
+        NodoLista pNL = productos.getInicio();
+        while(pNL != null) {
+            Producto p = (Producto) pNL.getDato();
+            if(p.getCodigo() == codigoProd) {
+                return true;
+            }
+            pNL = pNL.getSig();
+        }
+        return false;
     }
 
     @Override
