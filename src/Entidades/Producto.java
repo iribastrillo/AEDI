@@ -10,15 +10,16 @@ package Entidades;
  */
 public class Producto implements Comparable<Producto> {
 
-    
-    private String codigo;
+    private static int codigoSig = 1;
+    private int codigo;
     private String nombre;
     private String descripcion;
 
-    public Producto(String codigo, String nombre, String descripcion) {
-        this.codigo = codigo;
+    public Producto(String nombre, String descripcion) {
+        this.codigo = codigoSig;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        codigoSig++;
     }
     
     
@@ -30,14 +31,14 @@ public class Producto implements Comparable<Producto> {
     /**
      * @return the codigo
      */
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
     /**
      * @param codigo the codigo to set
      */
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 

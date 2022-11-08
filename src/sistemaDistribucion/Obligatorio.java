@@ -56,9 +56,9 @@ public class Obligatorio  implements IObligatorio{
         this.agregarCamion("AAA1111", 1);
         this.agregarCamion("AAA1000", -1);
         this.listarCamiones();
-        this.registrarProducto("1428", "Pan Marbella Lactal 550g", "Pan lacteado en fetas");
-        this.registrarProducto("1429", "Pan Marbella Ingegral 550g", "Pan lacteado en fetas");
-        this.registrarProducto("1429", "Pan Marbella Ingegral 550g", "Pan integral en fetas");
+        this.registrarProducto("Pan Marbella Lactal 550g", "Pan lacteado en fetas");
+        this.registrarProducto("Pan Marbella Ingegral 550g", "Pan lacteado en fetas");
+        this.registrarProducto("Pan Marbella Ingegral 550g", "Pan integral en fetas");
         //this.listarProductos();
         System.out.println("-------ULTIMO PRODUCTO-------");
         this.ultimoProductoRegistrado();
@@ -138,13 +138,13 @@ public class Obligatorio  implements IObligatorio{
     }
 
     @Override
-    public Retorno registrarProducto(String codigo, String nombre, String descripcion) {
+    public Retorno registrarProducto(String nombre, String descripcion) {
         
         if(descripcion == "") {
             return new Retorno(Retorno.Resultado.ERROR_2);
         }
         
-        Producto p = new Producto(codigo, nombre, descripcion);
+        Producto p = new Producto(nombre, descripcion);
         NodoLista pNl = new NodoLista(p);
         
         if(getS().getListaProductos().esVacia()) {
