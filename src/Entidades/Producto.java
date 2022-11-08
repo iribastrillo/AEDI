@@ -11,12 +11,14 @@ package Entidades;
 public class Producto implements Comparable<Producto> {
 
     
-    private String codigo;
+    private static int codigo = 1;
+    private int codigoProd;
     private String nombre;
     private String descripcion;
 
-    public Producto(String codigo, String nombre, String descripcion) {
-        this.codigo = codigo;
+    public Producto(String nombre, String descripcion) {
+        this.codigoProd = codigo;
+        codigo++;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
@@ -30,15 +32,15 @@ public class Producto implements Comparable<Producto> {
     /**
      * @return the codigo
      */
-    public String getCodigo() {
-        return codigo;
+    public int getCodigo() {
+        return codigoProd;
     }
 
     /**
      * @param codigo the codigo to set
      */
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigo(int codigoProd) {
+        this.codigoProd = codigoProd;
     }
 
     /**
@@ -74,8 +76,6 @@ public class Producto implements Comparable<Producto> {
         Producto producto = (Producto) o;
         return this.nombre.compareTo(producto.nombre) == 0;
     }
-
-    
     
     public String toString(){
       return "Producto: " + this.getCodigo() + " - " + this.getNombre() + " / " + this.getDescripcion();

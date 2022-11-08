@@ -14,7 +14,7 @@ public interface IObligatorio {
      //pre:      post:
     public Retorno eliminarCamion(String matricula);
      //pre:      post:
-    public Retorno registrarProducto(String código, String nombre, String descripcion);
+    public Retorno registrarProducto(String codigo, String nombre, String descripcion);
      //pre:      post:
     public Retorno altaDeStockDeProducto(String matriculaCamion, int codigoProd, int nroCaja, int cantUnidades);
      //pre:      post:

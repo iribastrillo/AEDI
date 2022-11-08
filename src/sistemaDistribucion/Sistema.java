@@ -5,6 +5,7 @@ import Entidades.Camion;
 import TADs.Lista;
 import Entidades.Cliente;
 import Entidades.Envio;
+import TADs.Cola;
 import TADs.NodoLista;
 
 
@@ -15,6 +16,7 @@ public class Sistema {
     private Lista listaCamiones;
     private int capacidadMaxima;
     private Lista listaProductos;
+    private Lista stockProductos;
     
     public  Sistema(int capacidadCajas){
         this.listaClientes = new Lista();
@@ -22,6 +24,7 @@ public class Sistema {
         this.capacidadMaxima = capacidadCajas;
         this.listaCamiones = new Lista();
         this.listaProductos = new Lista();
+        this.stockProductos = new Lista();
     }
     /**
      * @return the listaClientes
@@ -119,5 +122,19 @@ public class Sistema {
      */
     public void setListaProductos(Lista listaProductos) {
         this.listaProductos = listaProductos;
+    }
+
+    /**
+     * @return the stockProductos
+     */
+    public Lista getStockProductos() {
+        return stockProductos;
+    }
+
+    /**
+     * @param stockProductos the stockProductos to set
+     */
+    public void setStockProductos(Lista stockProductos) {
+        this.stockProductos = stockProductos;
     }
 }

@@ -8,6 +8,7 @@ import Entidades.Cliente;
 import TADs.NodoLista;
 import Entidades.Camion;
 import Entidades.Producto;
+import Entidades.StockProductos;
 import TADs.Lista;
 
 /**
@@ -56,12 +57,15 @@ public class Obligatorio  implements IObligatorio{
         this.agregarCamion("AAA1111", 1);
         this.agregarCamion("AAA1000", -1);
         this.listarCamiones();
-        this.registrarProducto("1428", "Pan Marbella Lactal 550g", "Pan lacteado en fetas");
-        this.registrarProducto("1429", "Pan Marbella Ingegral 550g", "Pan lacteado en fetas");
-        this.registrarProducto("1429", "Pan Marbella Ingegral 550g", "Pan integral en fetas");
+        this.registrarProducto("1428","Pan Marbella Lactal 550g", "Pan lacteado en fetas");
+        this.registrarProducto("1429","Pan Marbella Ingegral 580g", "Pan lacteado en fetas");
+        this.registrarProducto("1429","Pan Marbella Ingegral 580g", "Pan integral en fetas");
         //this.listarProductos();
         System.out.println("-------ULTIMO PRODUCTO-------");
         this.ultimoProductoRegistrado();
+        
+        this.altaDeStockDeProducto("AAA1111", 1428, 101, 10);
+        
 
         
         return new Retorno (Retorno.Resultado.OK);
@@ -117,6 +121,9 @@ public class Obligatorio  implements IObligatorio{
         } else {
             getS().getListaCamiones().agregarOrd(cl);
         }
+        
+        Retorno ret = new Retorno(Retorno.Resultado.OK);
+        ret.valorString = "dsafdsgsfda";
         return new Retorno(Retorno.Resultado.OK);
     }
 
@@ -159,7 +166,68 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno altaDeStockDeProducto(String matriculaCamion, int codigoProd, int nroCaja, int cantUnidades) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        
+        if(this.getS().getCapacidadMaxima() <= 0) {
+            ret = new Retorno(Retorno.Resultado.ERROR_5);
+            ret.valorString = "No hay capacidad para almacenar la caja.";
+            return ret;
+        }
+        
+        if(cantUnidades <= 0) {
+            ret = new Retorno(Retorno.Resultado.ERROR_3);
+            ret.valorString = "Unidades debe ser mayor que 0.";
+            return ret;
+        }
+        
+        Camion camion = new Camion(matriculaCamion);
+        if(!this.getS().getListaCamiones().pertenece(camion)){
+            ret = new Retorno(Retorno.Resultado.ERROR_1);
+            ret.valorString = "No existe camión.";
+            return ret;
+        }
+        
+        Lista productos = getS().getListaProductos();
+        NodoLista pr = productos.getInicio();
+        Producto actual = (Producto) pr.getDato();
+        String strCodProd = Integer.toString(codigoProd);
+
+        while(pr != null) {
+            if(!actual.existeProducto(strCodProd)){
+                ret = new Retorno(Retorno.Resultado.ERROR_2);
+                ret.valorString = "No existe producto.";
+                return ret;
+            }
+            pr = pr.getSig();
+        }
+        
+        Lista stock = this.getS().getStockProductos();
+        
+        StockProductos nuevoStock = new StockProductos(matriculaCamion, Integer.toString(codigoProd), nroCaja, cantUnidades);
+        NodoLista nuevoStockNL = new NodoLista(nuevoStock);
+
+        if(!stock.esVacia()){
+            
+            NodoLista stockNL = stock.getInicio();
+            StockProductos stockDato = (StockProductos) stockNL.getDato();
+            while(stockNL != null) {
+                if(stockDato.getNroCaja() == nroCaja) {
+                    ret = new Retorno(Retorno.Resultado.ERROR_4);
+                    ret.valorString = "Ya existe ese nro. de caja.";
+                    return ret;
+                }
+                stockNL = stockNL.getSig();
+            }
+        } else {
+            this.getS().getStockProductos().agregarInicio(nuevoStockNL);
+            ret = new Retorno(Retorno.Resultado.OK);
+            ret.valorString = "Se ingresó stock correctamente.";
+            return ret;
+        }
+        this.getS().getStockProductos().agregarFinal(nuevoStockNL);
+        ret = new Retorno(Retorno.Resultado.OK);
+        ret.valorString = "Se ingresó stock correctamente.";
+        return ret;
     }
 
     @Override
@@ -209,7 +277,16 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno reporteDeEnviosDeProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Retorno ret = new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        
+        this.getS().getStockProductos().mostrar();
+        ret = new Retorno(Retorno.Resultado.OK);
+        ret.valorString = "Se muestra correctamente.";
+        
+        
+        
+        return ret;
+        
     }
     
 }
