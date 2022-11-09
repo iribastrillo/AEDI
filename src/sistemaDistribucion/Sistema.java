@@ -1,19 +1,22 @@
 
 package sistemaDistribucion;
 
+import Entidades.Caja;
 import Entidades.Camion;
 import TADs.Lista;
 import Entidades.Cliente;
 import Entidades.Envio;
+import Entidades.Producto;
 import TADs.NodoLista;
 
 
 public class Sistema {
-   
+
     private Lista listaClientes;
     private Lista listaEnvios;
     private Lista listaCamiones;
     private int capacidadMaxima;
+    private int capacidadActual;
     private Lista listaProductos;
     private Lista listaStock;
     
@@ -21,6 +24,7 @@ public class Sistema {
         this.listaClientes = new Lista();
         this.listaEnvios = new Lista();
         this.capacidadMaxima = capacidadCajas;
+        this.capacidadActual = 0;
         this.listaCamiones = new Lista();
         this.listaProductos = new Lista();
         this.listaStock = new Lista();
@@ -136,5 +140,49 @@ public class Sistema {
     public void setListaStock(Lista listaStock) {
         this.listaStock = listaStock;
     }
- 
+
+        /**
+     * @return the capacidadActual
+     */
+    public int getCapacidadActual() {
+        return capacidadActual;
+    }
+
+    /**
+     * @param capacidadActual the capacidadActual to set
+     */
+    public void setCapacidadActual(int capacidadActual) {
+        this.capacidadActual = capacidadActual;
+    }
+   
+    public boolean hayCapacidad() {
+        return this.getCapacidadActual() < this.getCapacidadMaxima();
+    }
+    
+    
+    public boolean existeCaja(int nroCaja) {
+        Lista productos = this.getListaProductos();
+        NodoLista pNL = productos.getInicio();
+        while(pNL != null ) {
+            
+            
+            Producto p = (Producto) pNL.getDato();
+            Lista listaCajas = p.getCajas();
+            NodoLista cNL = listaCajas.getInicio();
+            if(p.tengoCajas()){
+                while(cNL != null) {
+                    Caja c = (Caja) cNL.getDato();
+                    if(c.getNroCaja() == nroCaja) {
+                        return true;
+                    }
+                    cNL = cNL.getSig();
+                }
+            }
+
+            pNL = pNL.getSig();
+        }
+        
+        return false;
+    }
+    
 }

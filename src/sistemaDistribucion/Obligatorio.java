@@ -172,21 +172,30 @@ public class Obligatorio  implements IObligatorio{
             return new Retorno(Retorno.Resultado.ERROR_2);
         }
         
-        if(this.getS().getCapa)
-        
-        if(!this.getS().getListaStock().esVacia()) {
-            Caja c = new Caja(nroCaja);
-            if(this.getS().getListaStock().pertenece(c)){
-                return new Retorno(Retorno.Resultado.ERROR_4);
-            }
-
-        } else {
+        if(this.getS().existeCaja(nroCaja)){
+            return new Retorno(Retorno.Resultado.ERROR_4);
         }
+        
+        if(!this.getS().hayCapacidad()) {
+            return new Retorno(Retorno.Resultado.ERROR_5);
+        }
+        
+        Caja c = new Caja(nroCaja, cantUnidades);
+        Producto pNuevo = new Producto(codigoProd);
+        NodoLista nodoProducto = new NodoLista(pNuevo);
+        NodoLista pNodoLista = getS().getListaProductos().obtenerElemento(nodoProducto);
+        
+        Producto producto = (Producto) pNodoLista.getDato();
+        //agregar caja a la cola del producto.
+        
+        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
     }
-    
     
     public boolean existeProducto(int codigoProd) {
         Lista productos = this.getS().getListaProductos();
+        if(productos.esVacia()){
+            return false;
+        }
         NodoLista pNL = productos.getInicio();
         while(pNL != null) {
             Producto p = (Producto) pNL.getDato();

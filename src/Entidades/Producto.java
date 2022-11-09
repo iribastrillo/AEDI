@@ -4,6 +4,8 @@
  */
 package Entidades;
 
+import TADs.Lista;
+
 /**
  *
  * @author usuario
@@ -14,20 +16,29 @@ public class Producto implements Comparable<Producto> {
     private int codigo;
     private String nombre;
     private String descripcion;
+    private Lista cajas;
 
     public Producto(String nombre, String descripcion) {
         this.codigo = codigoSig;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.cajas = new Lista();
         codigoSig++;
+    }
+    
+    public Producto(int codigo){
+        this.codigo = codigo;
     }
     
     
     @Override
     public int compareTo(Producto o) {
-        return this.nombre.compareTo(o.nombre);
+        if(this.codigo == o.codigo) {
+            return 0;
+        }
+        return -1;
     }
-    
+   
     /**
      * @return the codigo
      */
@@ -76,10 +87,25 @@ public class Producto implements Comparable<Producto> {
         return this.nombre.compareTo(producto.nombre) == 0;
     }
 
-    
-    
     public String toString(){
       return "Producto: " + this.getCodigo() + " - " + this.getNombre() + " / " + this.getDescripcion();
     }    
+    /**
+     * @return the cajas
+     */
+    public Lista getCajas() {
+        return cajas;
+    }
+
+    /**
+     * @param cajas the cajas to set
+     */
+    public void setCajas(Lista cajas) {
+        this.cajas = cajas;
+    }
+    
+    public boolean tengoCajas() {
+        return !this.getCajas().esVacia();
+    }
     
 }

@@ -10,12 +10,10 @@ package Entidades;
  */
 public class Caja implements Comparable<Caja> {
     
-    private int codProducto;
     private int nroCaja;
     private int cantUnidades;
 
-    public Caja(int codProducto, int nroCaja, int cantUnidades) {
-        this.codProducto = codProducto;
+    public Caja(int nroCaja, int cantUnidades) {
         this.nroCaja = nroCaja;
         this.cantUnidades = cantUnidades;
     }
@@ -26,20 +24,6 @@ public class Caja implements Comparable<Caja> {
     @Override
     public int compareTo(Caja o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    /**
-     * @return the codProducto
-     */
-    public int getCodProducto() {
-        return codProducto;
-    }
-
-    /**
-     * @param codProducto the codProducto to set
-     */
-    public void setCodProducto(int codProducto) {
-        this.codProducto = codProducto;
     }
 
     /**
