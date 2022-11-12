@@ -212,16 +212,16 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarCamiones() {
-        this.getS().getListaCamiones().mostrar();
+        NodoLista inicio = this.getS().getListaCamiones().getInicio();
+        getS().getListaCamiones().mostrarREC(inicio);
         return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override
     public Retorno listarClientesOrdenado() {
-        Retorno ret = new Retorno(Retorno.Resultado.OK);
-        getS().getListaClientes().mostrar();
-        return ret;
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        NodoLista inicio = this.getS().getListaClientes().getInicio();
+        getS().getListaClientes().mostrarREC(inicio);
+        return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override

@@ -26,11 +26,8 @@ public class Main {
         System.out.println("--------------------------------------------------");
 
         obl.eliminarCliente("1253");
-        
-        obl.getS().getListaClientes().mostrar();
-        
+                        
         System.out.println("--------------------------------------------------");
-        obl.getS().getListaCamiones().mostrar();
     }
         public static void juegodeprueba2(Obligatorio obl, Prueba p) throws ParseException {
         // escriba su juego de prueba aqui
