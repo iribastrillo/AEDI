@@ -185,4 +185,31 @@ public class Sistema {
         return false;
     }
     
+    public boolean existeProducto(int codigoProd) {
+        Lista productos = this.getListaProductos();
+        if(productos.esVacia()){
+            return false;
+        }
+        NodoLista pNL = productos.getInicio();
+        while(pNL != null) {
+            Producto p = (Producto) pNL.getDato();
+            if(p.getCodigo() == codigoProd) {
+                return true;
+            }
+            pNL = pNL.getSig();
+        }
+        return false;
+    }
+    
+    public void aumentarEspacio() {
+        this.capacidadActual--;
+    }
+    
+    public void disminuirEspacio() {
+        this.capacidadActual++;
+    }
+        
+        
+
+    
 }

@@ -9,6 +9,7 @@ import Entidades.Cliente;
 import TADs.NodoLista;
 import Entidades.Camion;
 import Entidades.Producto;
+import TADs.Cola;
 import TADs.Lista;
 
 /**
@@ -64,7 +65,17 @@ public class Obligatorio  implements IObligatorio{
         System.out.println("-------ULTIMO PRODUCTO-------");
         this.ultimoProductoRegistrado();
 
+        this.altaDeStockDeProducto("AAK4543", 1, 101, 10);
+        this.altaDeStockDeProducto("AAK4543", 1, 102, 10);
+        this.altaDeStockDeProducto("AAK4543", 1, 101, 15);
         
+        Producto p = new Producto(1);
+        NodoLista pNL = new NodoLista(p);
+        Producto p2 = (Producto) this.getS().getListaProductos().obtenerElemento(pNL).getDato();
+        
+        Lista listaCajas = p2.getCajas();
+        
+        listaCajas.mostrar();
         return new Retorno (Retorno.Resultado.OK);
     }
 
@@ -163,12 +174,12 @@ public class Obligatorio  implements IObligatorio{
         if(cantUnidades <= 0) {
             return new Retorno(Retorno.Resultado.ERROR_3);
         }
-        
-        if(!this.getS().getListaCamiones().pertenece(matriculaCamion)){
+        Camion existeCamion = new Camion(matriculaCamion);
+        if(!this.getS().getListaCamiones().pertenece(existeCamion)){
             return new Retorno(Retorno.Resultado.ERROR_1);
         }
         
-        if(!existeProducto(codigoProd)){
+        if(!this.getS().existeProducto(codigoProd)){
             return new Retorno(Retorno.Resultado.ERROR_2);
         }
         
@@ -181,32 +192,19 @@ public class Obligatorio  implements IObligatorio{
         }
         
         Caja c = new Caja(nroCaja, cantUnidades);
+        NodoLista cajaNL = new NodoLista(c);
         Producto pNuevo = new Producto(codigoProd);
         NodoLista nodoProducto = new NodoLista(pNuevo);
         NodoLista pNodoLista = getS().getListaProductos().obtenerElemento(nodoProducto);
         
         Producto producto = (Producto) pNodoLista.getDato();
-        //agregar caja a la cola del producto.
-        
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Lista cajas = producto.getCajas();
+        cajas.agregarFinal(cajaNL);
+        this.getS().disminuirEspacio();
+                
+        return new Retorno(Retorno.Resultado.OK);
     }
     
-    public boolean existeProducto(int codigoProd) {
-        Lista productos = this.getS().getListaProductos();
-        if(productos.esVacia()){
-            return false;
-        }
-        NodoLista pNL = productos.getInicio();
-        while(pNL != null) {
-            Producto p = (Producto) pNL.getDato();
-            if(p.getCodigo() == codigoProd) {
-                return true;
-            }
-            pNL = pNL.getSig();
-        }
-        return false;
-    }
-
     @Override
     public Retorno retiroDeProducto(String matriculaCam, String rutCliente, int codProducto, int cant) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

@@ -25,6 +25,10 @@ public class Caja implements Comparable<Caja> {
     public int compareTo(Caja o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public String toString() {
+        return this.getNroCaja() + " - " + this.getCantUnidades();
+    }
 
     /**
      * @return the nroCaja

@@ -4,6 +4,7 @@
  */
 package Entidades;
 
+import TADs.Cola;
 import TADs.Lista;
 
 /**
