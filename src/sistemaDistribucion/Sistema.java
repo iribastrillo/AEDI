@@ -110,6 +110,7 @@ public class Sistema {
             if(envio.getMatricula().compareTo(camion.getMatricula()) == 0) {
                 ok = true;
             }
+            aux = aux.getSig();
         }
         return ok;
     }

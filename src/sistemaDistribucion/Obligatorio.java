@@ -163,6 +163,8 @@ public class Obligatorio  implements IObligatorio{
             return new Retorno(Retorno.Resultado.ERROR_5);
         }
         
+        
+        
         Caja c = new Caja(nroCaja, cantUnidades);
         NodoLista cajaNL = new NodoLista(c);
         Producto pNuevo = new Producto(codigoProd);
@@ -173,6 +175,8 @@ public class Obligatorio  implements IObligatorio{
         Cola cajas = producto.getCajas();
         cajas.encolar(cajaNL);
         this.getS().disminuirEspacio();          
+        
+        
         return new Retorno(Retorno.Resultado.OK);
     }
     
