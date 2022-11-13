@@ -119,6 +119,10 @@ public class Obligatorio  implements IObligatorio{
     @Override
     public Retorno registrarProducto(String nombre, String descripcion) {
         
+        Producto p1 = new Producto(nombre);
+        if(getS().getListaProductos().pertenece(p1)){
+            return new Retorno(Retorno.Resultado.ERROR_1);
+        }
         if(descripcion == "") {
             return new Retorno(Retorno.Resultado.ERROR_2);
         }
@@ -286,7 +290,7 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarOrdenesPendientes(int codProd) {
-        this.s.listarOrdenesPendientes();
+        this.s.listarOrdenesPendientes(codProd);
         return new Retorno(Retorno.Resultado.OK);
         
 

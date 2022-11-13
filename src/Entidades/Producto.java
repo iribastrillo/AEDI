@@ -28,6 +28,10 @@ public class Producto implements Comparable<Producto> {
         codigoSig++;
     }
     
+    public Producto (String nombre) {
+        this.nombre = nombre;
+    }
+    
     public Producto(int codigo){
         this.codigo = codigo;
     }

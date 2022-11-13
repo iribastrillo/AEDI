@@ -94,7 +94,7 @@ public class Pruebas {
         p.ver(this.s.retiroDeProducto("MEC4452", "111", 1, 600).resultado, Retorno.Resultado.OK, "Se retiran 600 unidades del producto Shampoo Lor");
         p.ver(this.s.retiroDeProducto("OOO1111", "222", 2, 2000).resultado, Retorno.Resultado.OK, "Se retiran 2000 unidades del producto Candado St");
         p.ver(this.s.retiroDeProducto("OOO1111", "222", 2, 1000).resultado, Retorno.Resultado.OK, "Se genera una orden pendiente por 1000 unidades del producto Candado St");
-        p.ver(this.s.retiroDeProducto("MEC4452", "333", 6, 40).resultado, Retorno.Resultado.OK, "Se retiran 40 unidades del producto Laptop Stu");
+        p.ver(this.s.retiroDeProducto("MEC4452", "333", 7, 40).resultado, Retorno.Resultado.OK, "Se retiran 40 unidades del producto Laptop Stu");
         p.ver(this.s.retiroDeProducto("VND2344", "333", 6, 40).resultado, Retorno.Resultado.ERROR_1, "No se realiza el retiro. No existe un camión de matrícula VND2344");
         p.ver(this.s.retiroDeProducto("MEC4452", "190", 6, 40).resultado, Retorno.Resultado.ERROR_2, "No se realiza el retiro. No existe cliente de rut 190");
         p.ver(this.s.retiroDeProducto("MEC4452", "333", 10, 40).resultado, Retorno.Resultado.ERROR_3, "No se realiza el retiro. No existe un producto de código 10");

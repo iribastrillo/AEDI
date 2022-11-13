@@ -218,13 +218,15 @@ public class Sistema {
         }
     }
     
-    public void listarOrdenesPendientes () {
+    public void listarOrdenesPendientes (int codProd) {
         NodoLista nodoProducto = this.getListaProductos().getInicio();
         while (nodoProducto != null) {
             Producto producto = (Producto) nodoProducto.getDato();
-            System.out.print (producto);
-            System.out.println("");
-            producto.getListaEspera().mostrarCola();
+            if (producto.getCodigo() == codProd) {
+                System.out.print (producto);
+                System.out.println("");
+                producto.getListaEspera().mostrarCola();
+            }
             nodoProducto = nodoProducto.getSig();
         }
     }
