@@ -40,40 +40,7 @@ public class Obligatorio  implements IObligatorio{
             return new Retorno (Retorno.Resultado.ERROR_1);
         }
         this.setS(new Sistema(cantidadmaxima));
-        
-        this.agregarCliente("Adolfo","1253",1234,"Direccion");
-        this.agregarCliente("Gonzalo","1234",1234,"Direccion");
-        this.agregarCliente("Bautista","1234",1234,"Direccion");
-        this.agregarCliente("Ignacio","12345",1234,"Direccion");
-        this.agregarCliente("Carmen","123456",1234,"Direccion");
-        
-        this.agregarCamion("AAV4543", 10);
-        this.agregarCamion("AAV4543", 15);
-        this.agregarCamion("AAK4543", 10);
-     
-        this.eliminarCamion("AAV4543");
-        
-        this.agregarCamion("AAA1111", 1);        
-        this.agregarCamion("AAA1000", -1);
-                
-        this.registrarProducto("Pan Marbella Lactal 550g", "Pan lacteado en fetas");
-        this.registrarProducto("Pan Marbella Ingegral 550g", "Pan lacteado en fetas");
-        this.registrarProducto("Pan Marbella Ingegral 550g", "Pan integral en fetas");
-        
-        this.altaDeStockDeProducto("AAK4543", 1, 101, 10);
-        this.altaDeStockDeProducto("AAK4543", 1, 102, 10);
-        this.altaDeStockDeProducto("AAK4543", 2, 103, 10);
-        this.altaDeStockDeProducto("AAK4543", 2, 104, 10);
-        
-        System.out.println("-------ULTIMO PRODUCTO-------");
-        this.ultimoProductoRegistrado();
-        System.out.println("-------LISTAR CAMIONES-------");
-        this.listarCamiones();
-        System.out.println("-------LISTAR CLIENTES-------");
-        this.listarClientesOrdenado();
-        System.out.println("-------LISTAR PRODUCTOS------");
-        this.listarProductos();
-                                
+
         return new Retorno (Retorno.Resultado.OK);
     }
 
