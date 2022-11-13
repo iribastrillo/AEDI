@@ -216,5 +216,16 @@ public class Sistema {
             nodoProducto = nodoProducto.getSig();
 
         }
-    }  
+    }
+    
+    public void listarOrdenesPendientes () {
+        NodoLista nodoProducto = this.getListaProductos().getInicio();
+        while (nodoProducto != null) {
+            Producto producto = (Producto) nodoProducto.getDato();
+            System.out.print (producto);
+            System.out.println("");
+            producto.getListaEspera().mostrarCola();
+            nodoProducto = nodoProducto.getSig();
+        }
+    }
 }

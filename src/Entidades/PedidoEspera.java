@@ -85,7 +85,7 @@ public class PedidoEspera implements Comparable<PedidoEspera> {
     
     @Override
     public String toString() {
-        return "Matricula: " + this.getMatriculaCamion() + " - Rut: " + this.getRutCliente() + " - Cod. Prod: " + this.getCodProducto() + " - Cantidad: " + this.getCantUnidades();
+        return "--------- Pendiente: matricula:" + this.getMatriculaCamion() + " - Rut: " + this.getRutCliente() + " - Cod. Prod: " + this.getCodProducto() + " - Cantidad: " + this.getCantUnidades();
     }
 
 }

@@ -56,8 +56,10 @@ public class Cliente implements Comparable<Cliente>{
     public int compareTo(Cliente o) {
         return this.rut.compareTo(o.rut);
     }
+    
+    @Override
     public String toString(){
-      return "Nombre:" + this.getNombre();
+      return "Nombre: " + this.getNombre();
     }    
     
     @Override

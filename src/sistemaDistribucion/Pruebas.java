@@ -124,8 +124,8 @@ public class Pruebas {
 
         p.ver(this.s.eliminarCamion("COC3100").resultado, Retorno.Resultado.OK, "Se elimina el camión COC3100");
         p.ver(this.s.eliminarCamion("TUT3100").resultado, Retorno.Resultado.ERROR_1, "No se elimina. No existe camion con matricula TUT3100");
-        p.ver(this.s.eliminarCamion("MEC4452").resultado, Retorno.Resultado.ERROR_2, "No se elimina. El camion MEC4452 tiene enttregas realizadas");
-        p.ver(this.s.eliminarCamion("OOO1111").resultado, Retorno.Resultado.ERROR_2, "No se elimina. El camion OOO1111 tiene enttregas realizadas");
+        p.ver(this.s.eliminarCamion("MEC4452").resultado, Retorno.Resultado.ERROR_2, "No se elimina. El camion MEC4452 tiene entregas realizadas");
+        p.ver(this.s.eliminarCamion("OOO1111").resultado, Retorno.Resultado.ERROR_2, "No se elimina. El camion OOO1111 tiene entregas realizadas");
 
         p.ver(this.s.listarCamiones().resultado, Retorno.Resultado.OK, "Se listan 4 camiones");
 
@@ -133,7 +133,7 @@ public class Pruebas {
         p.ver(this.s.eliminarCliente("123").resultado, Retorno.Resultado.ERROR_1, "No se elimina. No existe cliente con rut 123");
         p.ver(this.s.eliminarCliente("111").resultado, Retorno.Resultado.ERROR_2, "No se elimina. El cliente 111 tiene entregas realizadas");
 
-        p.ver(this.s.listarClientesOrdenado().resultado, Retorno.Resultado.OK, "Se listan 5 clientes");
+        p.ver(this.s.listarClientesOrdenado().resultado, Retorno.Resultado.OK, "Se listan 4 clientes");
     }
 
     public void pruebasDeReporteDeEnviosXProducto(Obligatorio s, Prueba p) {

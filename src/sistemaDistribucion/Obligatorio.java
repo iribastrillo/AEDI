@@ -286,7 +286,9 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarOrdenesPendientes(int codProd) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        this.s.listarOrdenesPendientes();
+        return new Retorno(Retorno.Resultado.OK);
+        
 
     }
 
