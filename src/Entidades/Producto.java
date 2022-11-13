@@ -89,7 +89,7 @@ public class Producto implements Comparable<Producto> {
 
     @Override
     public String toString(){
-      return "Producto: " + this.getCodigo() + " - " + this.getNombre() + " / " + this.getDescripcion();
+      return "Producto: cod. " + this.getCodigo() + " - " + this.getNombre() + " / " + this.getDescripcion();
     }    
     /**
      * @return the cajas

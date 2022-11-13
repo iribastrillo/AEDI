@@ -6,7 +6,7 @@ package sistemaDistribucion;
 
 /**
  *
- * @author Admin
+ * @author Pérez, G. 249454 ; Ribas, I. 242158
  */
 public class Pruebas {
     
@@ -33,14 +33,6 @@ public class Pruebas {
         p.ver(this.s.agregarCliente("Nicole Bañales", "222", 92323111, "Carlos Berg 934").resultado, Retorno.Resultado.ERROR_1, "Ya existe un cliente con rut 222");
 
         p.ver(this.s.listarClientesOrdenado().resultado, Retorno.Resultado.OK, "Se listan 5 clientes");
-        /*
-        *********** Ejemplo de reporte de clientes listados ordenados alfabeticamente ****************
-        Felipe Muñoz - 333
-        Ignacio Alcorta - 888
-        Micaela Pérez - 111
-        Perdro González - 444  
-        Romina Álvarez - 222
-         */
     }
 
     public void pruebasRegistroCamion(Obligatorio s, Prueba p) {
@@ -74,16 +66,6 @@ public class Pruebas {
         p.ver(this.s.registrarProducto("Barra de ejercicio", "Barra de ejercicio de hierro").resultado, Retorno.Resultado.OK, "Se registra el producto Barra de ejercicio");
 
         p.ver(this.s.listarProductos().resultado, Retorno.Resultado.OK, "Se listan 7 productos");
-        /*
-        *********** Ejemplo de reporte de productos listados con su stock ****************
-        Cod. Prod: 1 - Shampoo Lor - 0 unidades
-        Cod. Prod: 2 - Candado St - 0 unidades
-        Cod. Prod: 3 - Bicicleta Ronda - 0 unidades
-        Cod. Prod: 4 - Televisión Marc - 0 unidades
-        Cod. Prod: 5 - Monopatin - 0 unidades
-        Cod. Prod: 6 - Laptop Stu - 0 unidades
-        Cod. Prod: 7 - Barra de ejercicio - 0 unidades
-         */
     }
 
     public void pruebasAltaSotck(Obligatorio s, Prueba p) {
@@ -104,17 +86,6 @@ public class Pruebas {
         p.ver(this.s.altaDeStockDeProducto("TTT4500", 4, 111, 10).resultado, Retorno.Resultado.ERROR_5, "No se registra. La fabrica tiene un tope de 10 cajas");
 
         p.ver(this.s.listarProductos().resultado, Retorno.Resultado.OK, "Se listan 7 productos");
-
-        /*
-        *********** Ejemplo de reporte de productos listados con su stock ****************
-        Cod. Prod: 1 - Shampoo Lor - 3000 unidades
-        Cod. Prod: 2 - Candado St - 2000 unidades
-        Cod. Prod: 3 - Bicicleta Ronda - 20 unidades
-        Cod. Prod: 4 - Televisión Marc - 30 unidades
-        Cod. Prod: 5 - Monopatin - 30 unidades
-        Cod. Prod: 6 - Laptop Stu - 50 unidades
-        Cod. Prod: 7 - Barra de ejercicio - 0 unidades
-         */
     }
 
     public void pruebasRetiroDeProducto(Obligatorio s, Prueba p) {
@@ -132,17 +103,7 @@ public class Pruebas {
         p.ver(this.s.retiroDeProducto("TTT4500", "444", 3, 30).resultado, Retorno.Resultado.OK, "Se genera una orden pendiente por 30 unidades del producto Bicicleta Ronda");
 
         p.ver(this.s.listarProductos().resultado, Retorno.Resultado.OK, "Se listan 7 productos");
-
-        /*
-        *********** Ejemplo de reporte de productos listados con su stock ****************
-        Cod. Prod: 1 - Shampoo Lor - 200 unidades
-        Cod. Prod: 2 - Candado St - 0 unidades
-        Cod. Prod: 3 - Bicicleta Ronda - 0 unidades
-        Cod. Prod: 4 - Televisión Marc - 30 unidades
-        Cod. Prod: 5 - Monopatin - 30 unidades
-        Cod. Prod: 6 - Laptop Stu - 10 unidades
-        Cod. Prod: 7 - Barra de ejercicio - 0 unidades
-         */
+        
         p.ver(this.s.listarOrdenesPendientes(1).resultado, Retorno.Resultado.OK, "Ordenes pendientes del producto 1: No hay");
         p.ver(this.s.listarOrdenesPendientes(2).resultado, Retorno.Resultado.OK, "Ordenes pendientes del producto 2: Orden pendiente:1000u");
         p.ver(this.s.listarOrdenesPendientes(3).resultado, Retorno.Resultado.OK, "Ordenes pendientes del producto 3: Orden pendiente:10u - Orden pendiente:30u");
@@ -154,22 +115,9 @@ public class Pruebas {
 
         p.ver(this.s.ultimoProductoRegistrado().resultado, Retorno.Resultado.OK, "Producto: Cod. Prod: 7 - Barra de ejercicio - 0 unidades");
 
-        
         p.ver(this.s.altaDeStockDeProducto("MEC4452", 2, 194, 2000).resultado, Retorno.Resultado.OK, "Se agregan 2000 unidades de stock al producto Candado St. Se hace retiro pendiente de 1000u ");
         p.ver(this.s.listarOrdenesPendientes(2).resultado, Retorno.Resultado.OK, "Ordenes pendientes del producto 2: No hay");
-        p.ver(this.s.listarProductos().resultado, Retorno.Resultado.OK, "Se listan 7 productos");
-
-        /*
-        *********** Ejemplo de reporte de productos listados con su stock ****************
-        Cod. Prod: 1 - Shampoo Lor - 200 unidades
-        Cod. Prod: 2 - Candado St - 1000 unidades
-        Cod. Prod: 3 - Bicicleta Ronda - 0 unidades
-        Cod. Prod: 4 - Televisión Marc - 30 unidades
-        Cod. Prod: 5 - Monopatin - 30 unidades
-        Cod. Prod: 6 - Laptop Stu - 10 unidades
-        Cod. Prod: 7 - Barra de ejercicio - 0 unidades
-         */
-        
+        p.ver(this.s.listarProductos().resultado, Retorno.Resultado.OK, "Se listan 7 productos");        
     }
 
     public void pruebasDeBaja(Obligatorio s, Prueba p) {
@@ -180,26 +128,12 @@ public class Pruebas {
         p.ver(this.s.eliminarCamion("OOO1111").resultado, Retorno.Resultado.ERROR_2, "No se elimina. El camion OOO1111 tiene enttregas realizadas");
 
         p.ver(this.s.listarCamiones().resultado, Retorno.Resultado.OK, "Se listan 4 camiones");
-        /*
-        *********** Ejemplo de reporte de camiones listados ****************
-        MEC4452 - 2000
-        OOO1111 - 4000
-        WEC3234 - 3000
-        TTT4500 - 1000 
-         */
 
         p.ver(this.s.eliminarCliente("888").resultado, Retorno.Resultado.OK, "Se elimina el cliente 888");
         p.ver(this.s.eliminarCliente("123").resultado, Retorno.Resultado.ERROR_1, "No se elimina. No existe cliente con rut 123");
         p.ver(this.s.eliminarCliente("111").resultado, Retorno.Resultado.ERROR_2, "No se elimina. El cliente 111 tiene entregas realizadas");
 
         p.ver(this.s.listarClientesOrdenado().resultado, Retorno.Resultado.OK, "Se listan 5 clientes");
-        /*
-        *********** Ejemplo de reporte de clientes listados ordenados alfabeticamente ****************
-        Felipe Muñoz - 333
-        Micaela Pérez - 111
-        Perdro González - 444  
-        Romina Álvarez - 222
-         */
     }
 
     public void pruebasDeReporteDeEnviosXProducto(Obligatorio s, Prueba p) {
