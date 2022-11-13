@@ -9,11 +9,12 @@ package TADs;
  * @author usuario
  */
 public interface ICola {
-    public void encolar(int dato);
+    public void encolar(NodoLista nodo);
     public void desencolar();
     public boolean esVacia();
     public boolean esLlena();
     public int elementos();
     public NodoLista frente();
     public void mostrarCola();
+    public void mostrarREC(NodoLista nodo);
 }

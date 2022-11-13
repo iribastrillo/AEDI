@@ -10,6 +10,13 @@ package TADs;
  */
 public class Cola implements ICola {
 
+    private NodoLista inicio;
+    private NodoLista fin;
+    private int cantidad;
+    
+    public Cola () {
+        cantidad = 0;
+    }
     /**
      * @return the inicio
      */
@@ -51,39 +58,18 @@ public class Cola implements ICola {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-
-    /**
-     * @return the tope
-     */
-    public int getTope() {
-        return tope;
-    }
-
-    /**
-     * @param tope the tope to set
-     */
-    public void setTope(int tope) {
-        this.tope = tope;
-    }
-
-    private NodoLista inicio;
-    private NodoLista fin;
-    private int cantidad;
-    private int tope;
     
     @Override
-    public void encolar(int dato) {
-        if(this.getCantidad() < this.getTope()) {
+    public void encolar(NodoLista nodo) {
             if(this.esVacia()) {
-                this.setInicio(new NodoLista(dato));
-                this.setFin(new NodoLista(dato));
+                this.setInicio(nodo);
+                this.setFin(nodo);
                 this.setCantidad(1);
             }else {
-                fin.setSig(new NodoLista(dato));
-                fin = new NodoLista(dato);
-            }
-            
-        }
+                fin.setSig(nodo);
+                fin = nodo;
+                cantidad++;
+            }          
     }
 
     @Override
@@ -109,7 +95,7 @@ public class Cola implements ICola {
 
     @Override
     public boolean esLlena() {
-        return this.getCantidad() == this.getTope();
+        return false;
     }
 
     @Override
@@ -129,10 +115,17 @@ public class Cola implements ICola {
     public void mostrarCola() {
         NodoLista mostrar = getInicio();
         while(mostrar != null) {
-            System.out.println(mostrar.getDato() + " - ");
+            System.out.println(mostrar.getDato());
             mostrar = mostrar.getSig();
         }
             
     }
-    
+
+    @Override
+    public void mostrarREC(NodoLista nodo) {
+        if(nodo!=null){
+            System.out.println(nodo.getDato());
+            mostrarREC(nodo.getSig());
+        }
+    }
 }

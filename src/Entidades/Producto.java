@@ -5,7 +5,6 @@
 package Entidades;
 
 import TADs.Cola;
-import TADs.Lista;
 
 /**
  *
@@ -17,15 +16,15 @@ public class Producto implements Comparable<Producto> {
     private int codigo;
     private String nombre;
     private String descripcion;
-    private Lista cajas;
-    private Lista listaEspera;
+    private Cola listaEspera;
+    private Cola cajas;
 
     public Producto(String nombre, String descripcion) {
         this.codigo = codigoSig;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.cajas = new Lista();
-        this.listaEspera = new Lista();
+        this.listaEspera = new Cola();
+        this.cajas = new Cola();
         codigoSig++;
     }
     
@@ -90,20 +89,21 @@ public class Producto implements Comparable<Producto> {
         return this.nombre.compareTo(producto.nombre) == 0;
     }
 
+    @Override
     public String toString(){
-      return "Producto: " + this.getCodigo() + " - " + this.getNombre() + " / " + this.getDescripcion();
+      return "Producto: cod. " + this.getCodigo() + " - " + this.getNombre() + " / " + this.getDescripcion();
     }    
     /**
      * @return the cajas
      */
-    public Lista getCajas() {
+    public Cola getCajas() {
         return cajas;
     }
 
     /**
      * @param cajas the cajas to set
      */
-    public void setCajas(Lista cajas) {
+    public void setCajas(Cola cajas) {
         this.cajas = cajas;
     }
     
@@ -114,14 +114,14 @@ public class Producto implements Comparable<Producto> {
     /**
      * @return the listaEspera
      */
-    public Lista getListaEspera() {
+    public Cola getListaEspera() {
         return listaEspera;
     }
 
     /**
      * @param listaEspera the listaEspera to set
      */
-    public void setListaEspera(Lista listaEspera) {
+    public void setListaEspera(Cola listaEspera) {
         this.listaEspera = listaEspera;
     }
 

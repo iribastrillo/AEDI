@@ -29,8 +29,9 @@ public class Caja implements Comparable<Caja> {
         return -1;    
     }
     
+    @Override
     public String toString() {
-        return this.getNroCaja() + " - " + this.getCantUnidades();
+        return "--------- Caja nro. " + this.getNroCaja() + ". " + this.getCantUnidades() + " un.";
     }
 
     /**

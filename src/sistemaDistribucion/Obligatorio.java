@@ -41,31 +41,8 @@ public class Obligatorio  implements IObligatorio{
             return new Retorno (Retorno.Resultado.ERROR_1);
         }
         this.setS(new Sistema(cantidadmaxima));
-//        Cliente c = new Cliente("Pepe","1253",1234,"Direccion");
-//        Cliente c1 = new Cliente("Pepe1","1234",1234,"Direccion");
-//        Cliente c2 = new Cliente("Pepe2","12345",1234,"Direccion");
-//        Cliente c3 = new Cliente("Pepe3","123456",1234,"Direccion");
-        
-        this.agregarCliente("Adolfo","1253",1234,"Direccion");
-        this.agregarCliente("Gonzalo","1234",1234,"Direccion");
-        this.agregarCliente("Bautista","1234",1234,"Direccion");
-        this.agregarCliente("Ignacio","12345",1234,"Direccion");
-        this.agregarCliente("Carmen","123456",1234,"Direccion");
-        this.listarCamiones();
-        this.agregarCamion("AAV4543", 10);
-        this.agregarCamion("AAV4543", 15);
-        this.agregarCamion("AAK4543", 10);
-        this.eliminarCamion("AAV4543");
-        this.agregarCamion("AAA1111", 1);
-        this.agregarCamion("AAA1000", -1);
-        this.listarCamiones();
-        this.registrarProducto("Pan Marbella Lactal 550g", "Pan lacteado en fetas");
-        this.registrarProducto("Pan Marbella Ingegral 550g", "Pan lacteado en fetas");
-        this.registrarProducto("Pan Marbella Ingegral 550g", "Pan integral en fetas");
-        //this.listarProductos();
-        System.out.println("-------ULTIMO PRODUCTO-------");
-        this.ultimoProductoRegistrado();
 
+<<<<<<< HEAD
         System.out.println("----------------Listado de cajas antes de retirar ---------------------------");
         this.altaDeStockDeProducto("AAK4543", 1, 101, 10);
         this.altaDeStockDeProducto("AAK4543", 1, 102, 10);
@@ -89,6 +66,8 @@ public class Obligatorio  implements IObligatorio{
         
         
         listaEspera.mostrar();
+=======
+>>>>>>> main
         return new Retorno (Retorno.Resultado.OK);
     }
 
@@ -212,11 +191,17 @@ public class Obligatorio  implements IObligatorio{
         NodoLista pNodoLista = getS().getListaProductos().obtenerElemento(nodoProducto);
         
         Producto producto = (Producto) pNodoLista.getDato();
+<<<<<<< HEAD
         Lista cajas = producto.getCajas();
         cajas.agregarFinal(cajaNL);
         this.getS().disminuirEspacio();
         
         //Cuando se ingrese nuevo stock, debemos controlar el listado de espera. y dar de baja automáticamente.
+=======
+        Cola cajas = producto.getCajas();
+        cajas.encolar(cajaNL);
+        this.getS().disminuirEspacio();          
+>>>>>>> main
         return new Retorno(Retorno.Resultado.OK);
     }
     
@@ -285,22 +270,24 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarCamiones() {
-        this.getS().getListaCamiones().mostrar();
+        NodoLista inicio = this.getS().getListaCamiones().getInicio();
+        getS().getListaCamiones().mostrarREC(inicio);
         return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override
     public Retorno listarClientesOrdenado() {
-        Retorno ret = new Retorno(Retorno.Resultado.OK);
-        getS().getListaClientes().mostrar();
-        return ret;
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        NodoLista inicio = this.getS().getListaClientes().getInicio();
+        getS().getListaClientes().mostrarREC(inicio);
+        return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override
     public Retorno listarProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.getS().listarProductosConSuStock();
+        return new Retorno(Retorno.Resultado.OK);
     }
+    
 
     @Override
     public Retorno ultimoProductoRegistrado() {
