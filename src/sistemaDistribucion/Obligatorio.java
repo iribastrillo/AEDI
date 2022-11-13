@@ -290,6 +290,12 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarOrdenesPendientes(int codProd) {
+        NodoLista nodoProducto = new NodoLista (new Producto(codProd));
+        NodoLista producto = this.s.getListaProductos().obtenerElemento(nodoProducto);
+        
+        if (producto == null) {
+            return new Retorno (Retorno.Resultado.ERROR_1);
+        }
         this.s.listarOrdenesPendientes(codProd);
         return new Retorno(Retorno.Resultado.OK);
         
