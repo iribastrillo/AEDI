@@ -23,7 +23,10 @@ public class Caja implements Comparable<Caja> {
     }
     @Override
     public int compareTo(Caja o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(this.getNroCaja() == o.getNroCaja()) {
+            return 0;
+        }
+        return -1;    
     }
     
     public String toString() {

@@ -8,6 +8,7 @@ import Entidades.Caja;
 import Entidades.Cliente;
 import TADs.NodoLista;
 import Entidades.Camion;
+import Entidades.PedidoEspera;
 import Entidades.Producto;
 import TADs.Cola;
 import TADs.Lista;
@@ -65,17 +66,29 @@ public class Obligatorio  implements IObligatorio{
         System.out.println("-------ULTIMO PRODUCTO-------");
         this.ultimoProductoRegistrado();
 
+        System.out.println("----------------Listado de cajas antes de retirar ---------------------------");
         this.altaDeStockDeProducto("AAK4543", 1, 101, 10);
         this.altaDeStockDeProducto("AAK4543", 1, 102, 10);
+        this.altaDeStockDeProducto("AAK4543", 1, 103, 10);
+        this.altaDeStockDeProducto("AAK4543", 1, 104, 10);
+
         this.altaDeStockDeProducto("AAK4543", 1, 101, 15);
-        
         Producto p = new Producto(1);
         NodoLista pNL = new NodoLista(p);
         Producto p2 = (Producto) this.getS().getListaProductos().obtenerElemento(pNL).getDato();
         
         Lista listaCajas = p2.getCajas();
-        
+        Lista listaEspera = p2.getListaEspera();
         listaCajas.mostrar();
+        
+        this.retiroDeProducto("AAK4543", "1234", 1, 15);
+        System.out.println("----------------Listado de cajas despues de retirar ---------------------------");
+
+        listaCajas.mostrar();
+        System.out.println("----------------Listado de ESPERA: ---------------------------");
+        
+        
+        listaEspera.mostrar();
         return new Retorno (Retorno.Resultado.OK);
     }
 
@@ -174,6 +187,7 @@ public class Obligatorio  implements IObligatorio{
         if(cantUnidades <= 0) {
             return new Retorno(Retorno.Resultado.ERROR_3);
         }
+        
         Camion existeCamion = new Camion(matriculaCamion);
         if(!this.getS().getListaCamiones().pertenece(existeCamion)){
             return new Retorno(Retorno.Resultado.ERROR_1);
@@ -201,13 +215,72 @@ public class Obligatorio  implements IObligatorio{
         Lista cajas = producto.getCajas();
         cajas.agregarFinal(cajaNL);
         this.getS().disminuirEspacio();
-                
+        
+        //Cuando se ingrese nuevo stock, debemos controlar el listado de espera. y dar de baja automáticamente.
         return new Retorno(Retorno.Resultado.OK);
     }
     
     @Override
     public Retorno retiroDeProducto(String matriculaCam, String rutCliente, int codProducto, int cant) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Camion existeCamion = new Camion(matriculaCam);
+        if(!this.getS().getListaCamiones().pertenece(existeCamion)){
+            return new Retorno(Retorno.Resultado.ERROR_1);
+        }
+
+        Cliente existeCliente = new Cliente(rutCliente);
+        if(!this.getS().getListaClientes().pertenece(existeCliente)) {
+            return new Retorno(Retorno.Resultado.ERROR_2);
+        }
+
+        Producto buscarProducto = new Producto(codProducto);
+        NodoLista prodNL = new NodoLista(buscarProducto);
+        prodNL = this.getS().getListaProductos().obtenerElemento(prodNL);
+        if(prodNL == null) {
+            return new Retorno(Retorno.Resultado.ERROR_3);
+        } else {
+            Producto pEncontrado = (Producto) prodNL.getDato();
+            Lista listadoCajas = pEncontrado.getCajas();
+
+            NodoLista cajaAuxNL = listadoCajas.getInicio();
+            int cantRestante = cant;
+
+
+            while(cantRestante > 0 && cajaAuxNL != null) {
+    
+                Caja cajaAux = (Caja) cajaAuxNL.getDato();
+
+                if(cajaAux.getCantUnidades() > cantRestante){
+                    int unidades = cajaAux.getCantUnidades();
+                    unidades = unidades - cantRestante;
+                    cajaAux.setCantUnidades(unidades);
+                    NodoLista nuevaCaja = new NodoLista(cajaAux);
+                    pEncontrado.getCajas().obtenerElemento(nuevaCaja).setDato(cajaAux);
+                    cantRestante = 0;
+                    
+                    //TODO: agregar pedido
+                } else if(cajaAux.getCantUnidades() == cantRestante) {
+                    listadoCajas.borrarInicio();
+                    pEncontrado.setCajas(listadoCajas);
+                    cantRestante = 0;    
+                
+                    //TODO: agregar pedido
+                } else if(cajaAux.getCantUnidades() < cantRestante) {
+                    cantRestante = cantRestante - cajaAux.getCantUnidades();
+                    cajaAuxNL = cajaAuxNL.getSig();
+                    listadoCajas.borrarInicio();
+                    
+                    //TODO: agregar pedido
+                }
+
+            }
+            if(listadoCajas.getInicio() == null && cantRestante != 0) {
+                PedidoEspera pEspera = new PedidoEspera(matriculaCam, rutCliente, codProducto, cantRestante);
+                NodoLista EsperaNL = new NodoLista(pEspera);
+                pEncontrado.getListaEspera().setInicio(EsperaNL);                    
+            }            
+            
+        }
+        return new Retorno(Retorno.Resultado.OK);
     }
 
     @Override
@@ -236,6 +309,7 @@ public class Obligatorio  implements IObligatorio{
         Lista aux = new Lista();
         aux.agregarInicio(ultPNl);
         aux.mostrar();
+        //revisar
         
         return new Retorno(Retorno.Resultado.OK);
     }

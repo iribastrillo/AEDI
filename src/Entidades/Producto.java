@@ -18,12 +18,14 @@ public class Producto implements Comparable<Producto> {
     private String nombre;
     private String descripcion;
     private Lista cajas;
+    private Lista listaEspera;
 
     public Producto(String nombre, String descripcion) {
         this.codigo = codigoSig;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.cajas = new Lista();
+        this.listaEspera = new Lista();
         codigoSig++;
     }
     
@@ -109,4 +111,18 @@ public class Producto implements Comparable<Producto> {
         return !this.getCajas().esVacia();
     }
     
+    /**
+     * @return the listaEspera
+     */
+    public Lista getListaEspera() {
+        return listaEspera;
+    }
+
+    /**
+     * @param listaEspera the listaEspera to set
+     */
+    public void setListaEspera(Lista listaEspera) {
+        this.listaEspera = listaEspera;
+    }
+
 }
