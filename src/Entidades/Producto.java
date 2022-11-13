@@ -5,7 +5,6 @@
 package Entidades;
 
 import TADs.Cola;
-import TADs.Lista;
 
 /**
  *
@@ -17,13 +16,13 @@ public class Producto implements Comparable<Producto> {
     private int codigo;
     private String nombre;
     private String descripcion;
-    private Lista cajas;
+    private Cola cajas;
 
     public Producto(String nombre, String descripcion) {
         this.codigo = codigoSig;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.cajas = new Lista();
+        this.cajas = new Cola();
         codigoSig++;
     }
     
@@ -94,14 +93,14 @@ public class Producto implements Comparable<Producto> {
     /**
      * @return the cajas
      */
-    public Lista getCajas() {
+    public Cola getCajas() {
         return cajas;
     }
 
     /**
      * @param cajas the cajas to set
      */
-    public void setCajas(Lista cajas) {
+    public void setCajas(Cola cajas) {
         this.cajas = cajas;
     }
     

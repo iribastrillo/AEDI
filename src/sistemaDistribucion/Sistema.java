@@ -7,6 +7,7 @@ import TADs.Lista;
 import Entidades.Cliente;
 import Entidades.Envio;
 import Entidades.Producto;
+import TADs.Cola;
 import TADs.NodoLista;
 
 
@@ -164,11 +165,9 @@ public class Sistema {
         Lista productos = this.getListaProductos();
         NodoLista pNL = productos.getInicio();
         while(pNL != null ) {
-            
-            
             Producto p = (Producto) pNL.getDato();
-            Lista listaCajas = p.getCajas();
-            NodoLista cNL = listaCajas.getInicio();
+            Cola colaCajas = p.getCajas();
+            NodoLista cNL = colaCajas.getInicio();
             if(p.tengoCajas()){
                 while(cNL != null) {
                     Caja c = (Caja) cNL.getDato();
@@ -178,7 +177,6 @@ public class Sistema {
                     cNL = cNL.getSig();
                 }
             }
-
             pNL = pNL.getSig();
         }
         

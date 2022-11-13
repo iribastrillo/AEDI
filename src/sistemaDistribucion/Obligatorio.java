@@ -40,42 +40,38 @@ public class Obligatorio  implements IObligatorio{
             return new Retorno (Retorno.Resultado.ERROR_1);
         }
         this.setS(new Sistema(cantidadmaxima));
-//        Cliente c = new Cliente("Pepe","1253",1234,"Direccion");
-//        Cliente c1 = new Cliente("Pepe1","1234",1234,"Direccion");
-//        Cliente c2 = new Cliente("Pepe2","12345",1234,"Direccion");
-//        Cliente c3 = new Cliente("Pepe3","123456",1234,"Direccion");
         
         this.agregarCliente("Adolfo","1253",1234,"Direccion");
         this.agregarCliente("Gonzalo","1234",1234,"Direccion");
         this.agregarCliente("Bautista","1234",1234,"Direccion");
         this.agregarCliente("Ignacio","12345",1234,"Direccion");
         this.agregarCliente("Carmen","123456",1234,"Direccion");
-        this.listarCamiones();
+        
+        
         this.agregarCamion("AAV4543", 10);
         this.agregarCamion("AAV4543", 15);
         this.agregarCamion("AAK4543", 10);
+     
         this.eliminarCamion("AAV4543");
-        this.agregarCamion("AAA1111", 1);
+        
+        this.agregarCamion("AAA1111", 1);        
         this.agregarCamion("AAA1000", -1);
-        this.listarCamiones();
+                
         this.registrarProducto("Pan Marbella Lactal 550g", "Pan lacteado en fetas");
         this.registrarProducto("Pan Marbella Ingegral 550g", "Pan lacteado en fetas");
         this.registrarProducto("Pan Marbella Ingegral 550g", "Pan integral en fetas");
-        //this.listarProductos();
-        System.out.println("-------ULTIMO PRODUCTO-------");
-        this.ultimoProductoRegistrado();
-
+        
         this.altaDeStockDeProducto("AAK4543", 1, 101, 10);
         this.altaDeStockDeProducto("AAK4543", 1, 102, 10);
         this.altaDeStockDeProducto("AAK4543", 1, 101, 15);
         
-        Producto p = new Producto(1);
-        NodoLista pNL = new NodoLista(p);
-        Producto p2 = (Producto) this.getS().getListaProductos().obtenerElemento(pNL).getDato();
-        
-        Lista listaCajas = p2.getCajas();
-        
-        listaCajas.mostrar();
+        System.out.println("-------ULTIMO PRODUCTO-------");
+        this.ultimoProductoRegistrado();
+        System.out.println("-------LISTAR CAMIONES-------");
+        this.listarCamiones();
+        System.out.println("-------LISTAR CLIENTES-------");
+        this.listarClientesOrdenado();
+                                
         return new Retorno (Retorno.Resultado.OK);
     }
 
@@ -198,10 +194,9 @@ public class Obligatorio  implements IObligatorio{
         NodoLista pNodoLista = getS().getListaProductos().obtenerElemento(nodoProducto);
         
         Producto producto = (Producto) pNodoLista.getDato();
-        Lista cajas = producto.getCajas();
-        cajas.agregarFinal(cajaNL);
-        this.getS().disminuirEspacio();
-                
+        Cola cajas = producto.getCajas();
+        cajas.encolar(cajaNL);
+        this.getS().disminuirEspacio();          
         return new Retorno(Retorno.Resultado.OK);
     }
     
