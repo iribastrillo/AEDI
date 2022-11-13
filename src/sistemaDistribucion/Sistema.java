@@ -92,7 +92,7 @@ public class Sistema {
         }
         while (!ok) {
             Envio envio = (Envio) aux.getDato();
-            if (envio.getCliente().compareTo(cliente) == 0) {
+            if (envio.getRut().compareTo(cliente.getRut()) == 0) {
                 ok = true;
             }
         }
@@ -107,7 +107,7 @@ public class Sistema {
         }
         while(!ok) {
             Envio envio = (Envio) aux.getDato();
-            if(envio.getCamion().compareTo(camion) == 0) {
+            if(envio.getMatricula().compareTo(camion.getMatricula()) == 0) {
                 ok = true;
             }
         }

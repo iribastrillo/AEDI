@@ -8,6 +8,7 @@ import Entidades.Caja;
 import Entidades.Cliente;
 import TADs.NodoLista;
 import Entidades.Camion;
+import Entidades.Envio;
 import Entidades.PedidoEspera;
 import Entidades.Producto;
 import TADs.Cola;
@@ -42,32 +43,6 @@ public class Obligatorio  implements IObligatorio{
         }
         this.setS(new Sistema(cantidadmaxima));
 
-<<<<<<< HEAD
-        System.out.println("----------------Listado de cajas antes de retirar ---------------------------");
-        this.altaDeStockDeProducto("AAK4543", 1, 101, 10);
-        this.altaDeStockDeProducto("AAK4543", 1, 102, 10);
-        this.altaDeStockDeProducto("AAK4543", 1, 103, 10);
-        this.altaDeStockDeProducto("AAK4543", 1, 104, 10);
-
-        this.altaDeStockDeProducto("AAK4543", 1, 101, 15);
-        Producto p = new Producto(1);
-        NodoLista pNL = new NodoLista(p);
-        Producto p2 = (Producto) this.getS().getListaProductos().obtenerElemento(pNL).getDato();
-        
-        Lista listaCajas = p2.getCajas();
-        Lista listaEspera = p2.getListaEspera();
-        listaCajas.mostrar();
-        
-        this.retiroDeProducto("AAK4543", "1234", 1, 15);
-        System.out.println("----------------Listado de cajas despues de retirar ---------------------------");
-
-        listaCajas.mostrar();
-        System.out.println("----------------Listado de ESPERA: ---------------------------");
-        
-        
-        listaEspera.mostrar();
-=======
->>>>>>> main
         return new Retorno (Retorno.Resultado.OK);
     }
 
@@ -191,17 +166,9 @@ public class Obligatorio  implements IObligatorio{
         NodoLista pNodoLista = getS().getListaProductos().obtenerElemento(nodoProducto);
         
         Producto producto = (Producto) pNodoLista.getDato();
-<<<<<<< HEAD
-        Lista cajas = producto.getCajas();
-        cajas.agregarFinal(cajaNL);
-        this.getS().disminuirEspacio();
-        
-        //Cuando se ingrese nuevo stock, debemos controlar el listado de espera. y dar de baja automáticamente.
-=======
         Cola cajas = producto.getCajas();
         cajas.encolar(cajaNL);
         this.getS().disminuirEspacio();          
->>>>>>> main
         return new Retorno(Retorno.Resultado.OK);
     }
     
@@ -222,46 +189,57 @@ public class Obligatorio  implements IObligatorio{
         prodNL = this.getS().getListaProductos().obtenerElemento(prodNL);
         if(prodNL == null) {
             return new Retorno(Retorno.Resultado.ERROR_3);
-        } else {
-            Producto pEncontrado = (Producto) prodNL.getDato();
-            Lista listadoCajas = pEncontrado.getCajas();
+        } 
 
-            NodoLista cajaAuxNL = listadoCajas.getInicio();
-            int cantRestante = cant;
+        Producto pEncontrado = (Producto) prodNL.getDato();
+        Cola listadoCajas = pEncontrado.getCajas();
+
+        NodoLista cajaAuxNL = listadoCajas.getInicio();
+        int cantRestante = cant;
 
 
-            while(cantRestante > 0 && cajaAuxNL != null) {
-    
-                Caja cajaAux = (Caja) cajaAuxNL.getDato();
+        while(cantRestante > 0 && cajaAuxNL != null) {
 
-                if(cajaAux.getCantUnidades() > cantRestante){
-                    int unidades = cajaAux.getCantUnidades();
-                    unidades = unidades - cantRestante;
-                    cajaAux.setCantUnidades(unidades);
-                    NodoLista nuevaCaja = new NodoLista(cajaAux);
-                    pEncontrado.getCajas().obtenerElemento(nuevaCaja).setDato(cajaAux);
-                    cantRestante = 0;
-                    
-                    //TODO: agregar pedido
-                } else if(cajaAux.getCantUnidades() == cantRestante) {
-                    listadoCajas.borrarInicio();
-                    pEncontrado.setCajas(listadoCajas);
-                    cantRestante = 0;    
-                
-                    //TODO: agregar pedido
-                } else if(cajaAux.getCantUnidades() < cantRestante) {
-                    cantRestante = cantRestante - cajaAux.getCantUnidades();
-                    cajaAuxNL = cajaAuxNL.getSig();
-                    listadoCajas.borrarInicio();
-                    
-                    //TODO: agregar pedido
-                }
+            Caja cajaAux = (Caja) cajaAuxNL.getDato();
 
+            if(cajaAux.getCantUnidades() > cantRestante){
+                int unidades = cajaAux.getCantUnidades();
+                unidades = unidades - cantRestante;
+                cajaAux.setCantUnidades(unidades);
+                pEncontrado.getCajas().getInicio().setDato(cajaAux);
+                cantRestante = 0;
+
+                //TODO: agregar pedido
+            } else if(cajaAux.getCantUnidades() == cantRestante) {
+                listadoCajas.desencolar();
+                pEncontrado.setCajas(listadoCajas);
+                cantRestante = 0;    
+
+                //TODO: agregar pedido
+            } else if(cajaAux.getCantUnidades() < cantRestante) {
+                cantRestante = cantRestante - cajaAux.getCantUnidades();
+                cajaAuxNL = cajaAuxNL.getSig();
+                listadoCajas.desencolar();
+
+                //TODO: agregar pedido
             }
+            int enviado = cant - cantRestante;
+            if(enviado != 0) {
+                Envio envio = new Envio(rutCliente, enviado, codProducto, matriculaCam);
+                NodoLista envioNL = new NodoLista(envio);
+                if(this.getS().getListaEnvios().esVacia()) {
+                    this.getS().getListaEnvios().agregarInicio(envioNL);
+                } else {
+                    this.getS().getListaEnvios().agregarFinal(envioNL);
+
+                }
+            }
+            
+            
             if(listadoCajas.getInicio() == null && cantRestante != 0) {
                 PedidoEspera pEspera = new PedidoEspera(matriculaCam, rutCliente, codProducto, cantRestante);
                 NodoLista EsperaNL = new NodoLista(pEspera);
-                pEncontrado.getListaEspera().setInicio(EsperaNL);                    
+                pEncontrado.getListaEspera().encolar(EsperaNL);                    
             }            
             
         }
@@ -303,17 +281,18 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarEnvíosDeProducto(int codProd) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
     }
 
     @Override
     public Retorno listarOrdenesPendientes(int codProd) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+
     }
 
     @Override
     public Retorno reporteDeEnviosDeProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
     }
     
 }

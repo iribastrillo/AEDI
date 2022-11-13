@@ -8,31 +8,52 @@ package Entidades;
  *
  * @author Admin
  */
-public class Envio {
+public class Envio implements Comparable<Envio> {
 
-    
-    private Camion camion;
-    private Cliente cliente;
+    private String rut;
     private int cantidad;
+    private int codProd;
+    private String matricula;
 
-    public Envio (Cliente cliente, int cantidad, Camion camion) {
-        this.cliente = cliente;
+    public Envio (String rut, int cantidad, int codProd, String matricula) {
         this.cantidad = cantidad;
-        this.camion = camion;
+        this.rut = rut;
+        this.codProd = codProd;
+        this.matricula = matricula;
     }
+  
+    /**
+     * @return the cod
+     */
+    public int getCod() {
+        return codProd;
+    }
+
+    /**
+     * @param cod the cod to set
+     */
+    public void setCod(int cod) {
+        this.codProd = cod;
+    }
+
+    /**
+     * @return the rut
+     */
+    public String getRut() {
+        return rut;
+    }
+
+    /**
+     * @param rut the rut to set
+     */
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
     /**
      * @return the cliente
      */
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    /**
-     * @param cliente the cliente to set
-     */
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
+    
 
     /**
      * @return the cantidad
@@ -50,15 +71,24 @@ public class Envio {
     /**
      * @return the camion
      */
-    public Camion getCamion() {
-        return camion;
+    
+    /**
+     * @return the matricula
+     */
+    public String getMatricula() {
+        return matricula;
     }
 
     /**
-     * @param camion the camion to set
+     * @param matricula the matricula to set
      */
-    public void setCamion(Camion camion) {
-        this.camion = camion;
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+  
+    @Override
+    public int compareTo(Envio o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
