@@ -31,7 +31,7 @@ public class Main {
     }
         public static void juegodeprueba2(Obligatorio obl, Prueba p) throws ParseException {
         // escriba su juego de prueba aqui
-        int MAX_CANT_PALABRAS_X_LINEA = 3;
+        int MAX_CANT_PALABRAS_X_LINEA = 4;
         
         System.out.println( "1 ------------------------------------------------");
         p.ver(obl.crearSistemaDeDistribucion(MAX_CANT_PALABRAS_X_LINEA).resultado, Retorno.Resultado.OK, "Se creara sistema para 3 palabras por linea");

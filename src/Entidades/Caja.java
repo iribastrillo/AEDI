@@ -26,8 +26,9 @@ public class Caja implements Comparable<Caja> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    @Override
     public String toString() {
-        return this.getNroCaja() + " - " + this.getCantUnidades();
+        return "--------- Caja nro. " + this.getNroCaja() + ". " + this.getCantUnidades() + " un.";
     }
 
     /**

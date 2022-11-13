@@ -206,8 +206,15 @@ public class Sistema {
     public void disminuirEspacio() {
         this.capacidadActual++;
     }
-        
-        
+    public void listarProductosConSuStock () {
+        NodoLista nodoProducto = this.getListaProductos().getInicio();
+        while (nodoProducto != null) {
+            Producto producto = (Producto) nodoProducto.getDato();
+            System.out.print (producto);
+            System.out.println("");
+            producto.getCajas().mostrarCola();
+            nodoProducto = nodoProducto.getSig();
 
-    
+        }
+    }  
 }

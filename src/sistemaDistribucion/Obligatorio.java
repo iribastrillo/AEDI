@@ -47,7 +47,6 @@ public class Obligatorio  implements IObligatorio{
         this.agregarCliente("Ignacio","12345",1234,"Direccion");
         this.agregarCliente("Carmen","123456",1234,"Direccion");
         
-        
         this.agregarCamion("AAV4543", 10);
         this.agregarCamion("AAV4543", 15);
         this.agregarCamion("AAK4543", 10);
@@ -63,7 +62,8 @@ public class Obligatorio  implements IObligatorio{
         
         this.altaDeStockDeProducto("AAK4543", 1, 101, 10);
         this.altaDeStockDeProducto("AAK4543", 1, 102, 10);
-        this.altaDeStockDeProducto("AAK4543", 1, 101, 15);
+        this.altaDeStockDeProducto("AAK4543", 2, 103, 10);
+        this.altaDeStockDeProducto("AAK4543", 2, 104, 10);
         
         System.out.println("-------ULTIMO PRODUCTO-------");
         this.ultimoProductoRegistrado();
@@ -71,6 +71,8 @@ public class Obligatorio  implements IObligatorio{
         this.listarCamiones();
         System.out.println("-------LISTAR CLIENTES-------");
         this.listarClientesOrdenado();
+        System.out.println("-------LISTAR PRODUCTOS------");
+        this.listarProductos();
                                 
         return new Retorno (Retorno.Resultado.OK);
     }
@@ -221,8 +223,10 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.getS().listarProductosConSuStock();
+        return new Retorno(Retorno.Resultado.OK);
     }
+    
 
     @Override
     public Retorno ultimoProductoRegistrado() {

@@ -87,6 +87,7 @@ public class Producto implements Comparable<Producto> {
         return this.nombre.compareTo(producto.nombre) == 0;
     }
 
+    @Override
     public String toString(){
       return "Producto: " + this.getCodigo() + " - " + this.getNombre() + " / " + this.getDescripcion();
     }    

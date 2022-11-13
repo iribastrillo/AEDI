@@ -115,7 +115,7 @@ public class Cola implements ICola {
     public void mostrarCola() {
         NodoLista mostrar = getInicio();
         while(mostrar != null) {
-            System.out.println(mostrar.getDato() + " - ");
+            System.out.println(mostrar.getDato());
             mostrar = mostrar.getSig();
         }
             
