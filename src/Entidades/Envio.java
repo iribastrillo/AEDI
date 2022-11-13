@@ -87,6 +87,12 @@ public class Envio implements Comparable<Envio> {
     }
   
     @Override
+    public String toString() {
+        return "Camión: " + this.getMatricula() + " - Cliente: " + this.getRut() + " - Cantidad: " + this.getCantidad();
+    }
+    
+    
+    @Override
     public int compareTo(Envio o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
