@@ -151,16 +151,28 @@ public class Obligatorio  implements IObligatorio{
             return new Retorno(Retorno.Resultado.ERROR_1);
         }
         
-        if(!this.getS().existeProducto(codigoProd)){
-            return new Retorno(Retorno.Resultado.ERROR_2);
-        }
-        
         if(this.getS().existeCaja(nroCaja)){
             return new Retorno(Retorno.Resultado.ERROR_4);
         }
         
         if(!this.getS().hayCapacidad()) {
             return new Retorno(Retorno.Resultado.ERROR_5);
+        }
+        
+        if(!this.getS().existeProducto(codigoProd)){
+            return new Retorno(Retorno.Resultado.ERROR_2);
+        }
+        
+        Producto buscarProducto = new Producto(codigoProd);
+        NodoLista prodNL = new NodoLista(buscarProducto);
+        prodNL = this.getS().getListaProductos().obtenerElemento(prodNL);
+        if(prodNL == null) {
+            return new Retorno(Retorno.Resultado.ERROR_2);
+        } 
+
+        Producto productoActual = (Producto) prodNL.getDato();
+        if(productoActual.getListaEspera().getInicio() != null) {
+            
         }
         
         
@@ -221,7 +233,8 @@ public class Obligatorio  implements IObligatorio{
             } else if(cajaAux.getCantUnidades() == cantRestante) {
                 listadoCajas.desencolar();
                 pEncontrado.setCajas(listadoCajas);
-                cantRestante = 0;    
+                cantRestante = 0;
+                this.getS().aumentarEspacio();
 
                 //TODO: agregar pedido
             } else if(cajaAux.getCantUnidades() < cantRestante) {
@@ -229,6 +242,7 @@ public class Obligatorio  implements IObligatorio{
                 cajaAuxNL = cajaAuxNL.getSig();
                 listadoCajas.desencolar();
                 pEncontrado.setCajas(listadoCajas);
+                this.getS().aumentarEspacio();
 
                 //TODO: agregar pedido
             }
