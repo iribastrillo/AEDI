@@ -9,7 +9,6 @@ import Entidades.Cliente;
 import TADs.NodoLista;
 import Entidades.Camion;
 import Entidades.Envio;
-import Entidades.PedidoEspera;
 import Entidades.Producto;
 import TADs.Cola;
 import TADs.Lista;
@@ -183,20 +182,20 @@ public class Obligatorio  implements IObligatorio{
         NodoLista pEsperaNL = p.getListaEspera().getInicio();
         while(pEsperaNL != null && cantUnidades != 0) {
             
-            PedidoEspera pEsperaActual = (PedidoEspera) pEsperaNL.getDato();
+            Envio pEsperaActual = (Envio) pEsperaNL.getDato();
             
-            if(pEsperaActual.getCantUnidades() > cantUnidades){
-                this.retiroDeProducto(pEsperaActual.getMatriculaCamion(), pEsperaActual.getRutCliente(), pEsperaActual.getCodProducto(), cantUnidades);
-                pEsperaActual.setCantUnidades(pEsperaActual.getCantUnidades()-cantUnidades);
+            if(pEsperaActual.getCantidad() > cantUnidades){
+                this.retiroDeProducto(pEsperaActual.getMatricula(), pEsperaActual.getRut(), pEsperaActual.getCod(), cantUnidades);
+                pEsperaActual.setCantidad(pEsperaActual.getCantidad()-cantUnidades);
                 cantUnidades = 0;
-            } else if(pEsperaActual.getCantUnidades() == cantUnidades) {
-                this.retiroDeProducto(pEsperaActual.getMatriculaCamion(), pEsperaActual.getRutCliente(), pEsperaActual.getCodProducto(), cantUnidades);
+            } else if(pEsperaActual.getCantidad()== cantUnidades) {
+                this.retiroDeProducto(pEsperaActual.getMatricula(), pEsperaActual.getRut(), pEsperaActual.getCod(), cantUnidades);
                 p.getListaEspera().desencolar();
                 cantUnidades = 0;
-            } else if(pEsperaActual.getCantUnidades() < cantUnidades) {
-                this.retiroDeProducto(pEsperaActual.getMatriculaCamion(), pEsperaActual.getRutCliente(), pEsperaActual.getCodProducto(), pEsperaActual.getCantUnidades());
+            } else if(pEsperaActual.getCantidad() < cantUnidades) {
+                this.retiroDeProducto(pEsperaActual.getMatricula(), pEsperaActual.getRut(), pEsperaActual.getCod(), pEsperaActual.getCantidad());
                 p.getListaEspera().desencolar();
-                cantUnidades = cantUnidades - pEsperaActual.getCantUnidades();
+                cantUnidades = cantUnidades - pEsperaActual.getCantidad();
             }
             pEsperaNL = pEsperaNL.getSig();
         }
@@ -263,7 +262,7 @@ public class Obligatorio  implements IObligatorio{
             }
 
             if(cajaAuxNL == null && cantRestante != 0) {
-                PedidoEspera pEspera = new PedidoEspera(matriculaCam, rutCliente, codProducto, cantRestante);
+                Envio pEspera = new Envio(rutCliente, cantRestante, codProducto, matriculaCam);
                 NodoLista EsperaNL = new NodoLista(pEspera);
                 pEncontrado.getListaEspera().encolar(EsperaNL);                    
             }            
