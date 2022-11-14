@@ -170,13 +170,7 @@ public class Obligatorio  implements IObligatorio{
             return new Retorno(Retorno.Resultado.ERROR_2);
         } 
 
-        Producto productoActual = (Producto) prodNL.getDato();
-        if(productoActual.getListaEspera().getInicio() != null) {
-            
-        }
-        
-        
-        
+     
         Caja c = new Caja(nroCaja, cantUnidades);
         NodoLista cajaNL = new NodoLista(c);
         Producto pNuevo = new Producto(codigoProd);
@@ -187,8 +181,29 @@ public class Obligatorio  implements IObligatorio{
         Cola cajas = producto.getCajas();
         cajas.encolar(cajaNL);
         this.getS().disminuirEspacio();          
+
+        NodoLista pEsperaNL = producto.getListaEspera().getInicio();
+        while(pEsperaNL != null && cantUnidades != 0) {
+            
+            PedidoEspera pEsperaActual = (PedidoEspera) pEsperaNL.getDato();
+            
+            if(pEsperaActual.getCantUnidades() > cantUnidades){
+                this.retiroDeProducto(pEsperaActual.getMatriculaCamion(), pEsperaActual.getRutCliente(), pEsperaActual.getCodProducto(), cantUnidades);
+                pEsperaActual.setCantUnidades(pEsperaActual.getCantUnidades()-cantUnidades);
+                cantUnidades = 0;
+            } else if(pEsperaActual.getCantUnidades() == cantUnidades) {
+                this.retiroDeProducto(pEsperaActual.getMatriculaCamion(), pEsperaActual.getRutCliente(), pEsperaActual.getCodProducto(), cantUnidades);
+                producto.getListaEspera().desencolar();
+                cantUnidades = 0;
+            } else if(pEsperaActual.getCantUnidades() < cantUnidades) {
+                this.retiroDeProducto(pEsperaActual.getMatriculaCamion(), pEsperaActual.getRutCliente(), pEsperaActual.getCodProducto(), pEsperaActual.getCantUnidades());
+                producto.getListaEspera().desencolar();
+                cantUnidades = cantUnidades - pEsperaActual.getCantUnidades();
+            }
+            pEsperaNL = pEsperaNL.getSig();
+        }
         
-        
+
         return new Retorno(Retorno.Resultado.OK);
     }
     
