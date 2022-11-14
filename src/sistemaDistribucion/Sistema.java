@@ -85,34 +85,47 @@ public class Sistema {
     }
     
     public boolean tieneEntregas (Cliente cliente) {
-        boolean ok = false;
-        NodoLista aux = this.listaEnvios.getInicio();
-        if(aux == null) {
+        NodoLista productoInicialNL = this.listaProductos.getInicio();
+        if(productoInicialNL == null) {
             return false;
         }
-        while (!ok) {
-            Envio envio = (Envio) aux.getDato();
-            if (envio.getRut().compareTo(cliente.getRut()) == 0) {
-                ok = true;
+        
+        while(productoInicialNL != null) {
+            Producto productoActual = (Producto) productoInicialNL.getDato();
+            NodoLista envioInicialNL = productoActual.getEnvios().getInicio();
+            while(envioInicialNL != null) {
+                Envio envioActual = (Envio) envioInicialNL.getDato();
+                if(envioActual.getRut().compareTo(cliente.getRut()) == 0) {
+                    return true;
+                }
+                envioInicialNL = envioInicialNL.getSig();
             }
+            productoInicialNL = productoInicialNL.getSig();
         }
-        return ok;
+        return false;
     }
     
+    
     public boolean tieneEntregas(Camion camion) {
-        boolean ok = false;
-        NodoLista aux = this.listaEnvios.getInicio();
-        if(aux == null){
+
+        NodoLista productoInicialNL = this.listaProductos.getInicio();
+        if(productoInicialNL == null) {
             return false;
         }
-        while(!ok) {
-            Envio envio = (Envio) aux.getDato();
-            if(envio.getMatricula().compareTo(camion.getMatricula()) == 0) {
-                ok = true;
+        
+        while(productoInicialNL != null) {
+            Producto productoActual = (Producto) productoInicialNL.getDato();
+            NodoLista envioInicialNL = productoActual.getEnvios().getInicio();
+            while(envioInicialNL != null) {
+                Envio envioActual = (Envio) envioInicialNL.getDato();
+                if(envioActual.getMatricula().compareTo(camion.getMatricula()) == 0) {
+                    return true;
+                }
+                envioInicialNL = envioInicialNL.getSig();
             }
-            aux = aux.getSig();
+            productoInicialNL = productoInicialNL.getSig();
         }
-        return ok;
+        return false;
     }
 
     /**

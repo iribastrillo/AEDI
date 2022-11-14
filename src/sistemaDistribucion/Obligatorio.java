@@ -228,29 +228,29 @@ public class Obligatorio  implements IObligatorio{
                 cantRestante = cantRestante - cajaAux.getCantUnidades();
                 cajaAuxNL = cajaAuxNL.getSig();
                 listadoCajas.desencolar();
+                pEncontrado.setCajas(listadoCajas);
 
                 //TODO: agregar pedido
             }
-            int enviado = cant - cantRestante;
-            if(enviado != 0) {
-                Envio envio = new Envio(rutCliente, enviado, codProducto, matriculaCam);
-                NodoLista envioNL = new NodoLista(envio);
-                if(this.getS().getListaEnvios().esVacia()) {
-                    this.getS().getListaEnvios().agregarInicio(envioNL);
-                } else {
-                    this.getS().getListaEnvios().agregarFinal(envioNL);
 
-                }
-            }
-            
-            
-            if(listadoCajas.getInicio() == null && cantRestante != 0) {
+            if(cajaAuxNL == null && cantRestante != 0) {
                 PedidoEspera pEspera = new PedidoEspera(matriculaCam, rutCliente, codProducto, cantRestante);
                 NodoLista EsperaNL = new NodoLista(pEspera);
                 pEncontrado.getListaEspera().encolar(EsperaNL);                    
             }            
             
         }
+        
+        int enviado = cant - cantRestante;
+        if(enviado != 0) {
+            Envio envio = new Envio(rutCliente, enviado, codProducto, matriculaCam);
+            NodoLista envioNL = new NodoLista(envio);
+            pEncontrado.getEnvios().encolar(envioNL);
+            this.getS().getListaProductos().obtenerElemento(prodNL).setDato(pEncontrado);
+        }
+        
+        
+        
         return new Retorno(Retorno.Resultado.OK);
     }
 

@@ -12,12 +12,14 @@ import TADs.Cola;
  */
 public class Producto implements Comparable<Producto> {
 
+
     private static int codigoSig = 1;
     private int codigo;
     private String nombre;
     private String descripcion;
     private Cola listaEspera;
     private Cola cajas;
+    private Cola envios;
 
     public Producto(String nombre, String descripcion) {
         this.codigo = codigoSig;
@@ -25,6 +27,7 @@ public class Producto implements Comparable<Producto> {
         this.descripcion = descripcion;
         this.listaEspera = new Cola();
         this.cajas = new Cola();
+        this.envios = new Cola();
         codigoSig++;
     }
     
@@ -128,5 +131,19 @@ public class Producto implements Comparable<Producto> {
     public void setListaEspera(Cola listaEspera) {
         this.listaEspera = listaEspera;
     }
+        /**
+     * @return the envios
+     */
+    public Cola getEnvios() {
+        return envios;
+    }
+
+    /**
+     * @param envios the envios to set
+     */
+    public void setEnvios(Cola envios) {
+        this.envios = envios;
+    }
+
 
 }
