@@ -173,16 +173,14 @@ public class Obligatorio  implements IObligatorio{
      
         Caja c = new Caja(nroCaja, cantUnidades);
         NodoLista cajaNL = new NodoLista(c);
-        Producto pNuevo = new Producto(codigoProd);
-        NodoLista nodoProducto = new NodoLista(pNuevo);
-        NodoLista pNodoLista = getS().getListaProductos().obtenerElemento(nodoProducto);
         
-        Producto producto = (Producto) pNodoLista.getDato();
-        Cola cajas = producto.getCajas();
-        cajas.encolar(cajaNL);
-        this.getS().disminuirEspacio();          
+        Producto p = (Producto) prodNL.getDato();
+        p.getCajas().encolar(cajaNL);
+        prodNL.setDato(p);
 
-        NodoLista pEsperaNL = producto.getListaEspera().getInicio();
+        this.getS().disminuirEspacio();          
+        
+        NodoLista pEsperaNL = p.getListaEspera().getInicio();
         while(pEsperaNL != null && cantUnidades != 0) {
             
             PedidoEspera pEsperaActual = (PedidoEspera) pEsperaNL.getDato();
@@ -193,15 +191,17 @@ public class Obligatorio  implements IObligatorio{
                 cantUnidades = 0;
             } else if(pEsperaActual.getCantUnidades() == cantUnidades) {
                 this.retiroDeProducto(pEsperaActual.getMatriculaCamion(), pEsperaActual.getRutCliente(), pEsperaActual.getCodProducto(), cantUnidades);
-                producto.getListaEspera().desencolar();
+                p.getListaEspera().desencolar();
                 cantUnidades = 0;
             } else if(pEsperaActual.getCantUnidades() < cantUnidades) {
                 this.retiroDeProducto(pEsperaActual.getMatriculaCamion(), pEsperaActual.getRutCliente(), pEsperaActual.getCodProducto(), pEsperaActual.getCantUnidades());
-                producto.getListaEspera().desencolar();
+                p.getListaEspera().desencolar();
                 cantUnidades = cantUnidades - pEsperaActual.getCantUnidades();
             }
             pEsperaNL = pEsperaNL.getSig();
         }
+        
+        prodNL.setDato(p);
         
 
         return new Retorno(Retorno.Resultado.OK);
