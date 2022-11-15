@@ -176,6 +176,6 @@ public class Pruebas {
         this.pruebasRetiroDeProducto(this.s, new Prueba());
         this.pruebasDeReporteDeEnviosXProducto(this.s, new Prueba ());
         this.pruebasDeBaja(this.s, new Prueba ());
-        this.pruebasGonzalo(this.s, new Prueba());
+       // this.pruebasGonzalo(this.s, new Prueba());
     }
 }
