@@ -245,21 +245,24 @@ public class Sistema {
         }
     }
     
-    public int[][] matriz() {
+    public void matriz() {
         int filas = this.getListaProductos().cantElementos();
         int columnas = this.getListaClientes().cantElementos();
         
         Lista listaProductos = this.getListaProductos();
         Lista listaClientes = this.getListaClientes();
         
+        this.imprimirCabecera();
         
-        int m[][] = new int[filas][columnas];
 
         NodoLista prodAux = listaProductos.getInicio();
         int i = 0;
 
         while(prodAux != null){
-
+        
+            Producto p = (Producto) prodAux.getDato();
+            System.out.print("Cod. Prod.: "+ p.getCodigo() + "\t");
+            
             NodoLista cliAux = listaClientes.getInicio();
             int j = 0;
 
@@ -277,43 +280,29 @@ public class Sistema {
                     }
                     envAux = envAux.getSig();
                 }
-                m[i][j] = contEnvios;
-                System.out.println(j);
+                System.out.print(contEnvios + "\t");
+
                 j++;
                 cliAux = cliAux.getSig();
             }
             i++;
             prodAux = prodAux.getSig();
-        }
-        
-        
-        return m;
-    }
-    
-        public void mostrarMatriz(int [][]m) {
-    /*  String mostrarFila = "";
-        for(int  i = 0; i < m.length; i++) {
-            for(int j = 0; j < m[0].length; j++) {
-                if(j == m[0].length -1) {
-                    mostrarFila = mostrarFila + m[i][j];
-                } else {
-                    mostrarFila = mostrarFila + m[i][j] + " - ";
-                }
-            }
-            System.out.println(mostrarFila);
-            mostrarFila = "";
-        }*/
-        
-        for(int i = 0; i < m.length; i++) {
-            for(int j = 0; j < m[0].length; j++) {
-                if(j == m[0].length-1) {
-                    System.out.print(m[i][j]);
-                } else {
-                    System.out.print(m[i][j] + " - ");
-                }
-            }
             System.out.println("");
         }
+        
     }
+
+    public void imprimirCabecera() {
+        NodoLista cliAux = this.getListaClientes().getInicio();
+        System.out.print("           " + "\t");
+        while(cliAux != null) {
+            Cliente c = (Cliente)cliAux.getDato();
+            System.out.print(c.getRut() + "\t");
+            cliAux = cliAux.getSig();
+        }
+        System.out.println("");
+    }
+    
+    
     
 }

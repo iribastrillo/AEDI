@@ -338,7 +338,7 @@ public class Obligatorio  implements IObligatorio{
     @Override
     public Retorno reporteDeEnviosDeProductos() {
 
-        this.getS().mostrarMatriz(this.getS().matriz());
+        this.getS().matriz();
         return new Retorno(Retorno.Resultado.OK);
     }
     
