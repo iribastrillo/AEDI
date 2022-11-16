@@ -14,7 +14,6 @@ import TADs.NodoLista;
 public class Sistema {
 
     private Lista listaClientes;
-    private Lista listaEnvios;
     private Lista listaCamiones;
     private int capacidadMaxima;
     private int capacidadActual;
@@ -23,7 +22,6 @@ public class Sistema {
     
     public  Sistema(int capacidadCajas){
         this.listaClientes = new Lista();
-        this.listaEnvios = new Lista();
         this.capacidadMaxima = capacidadCajas;
         this.capacidadActual = 0;
         this.listaCamiones = new Lista();
@@ -57,19 +55,6 @@ public class Sistema {
         this.capacidadMaxima = capacidadMaxima;
     }
     
-    /**
-     * @return the listaEnvios
-     */
-    public Lista getListaEnvios() {
-        return listaEnvios;
-    }
-
-    /**
-     * @param listaEnvios the listaEnvios to set
-     */
-    public void setListaEnvios(Lista listaEnvios) {
-        this.listaEnvios = listaEnvios;
-    }    
         /**
      * @return the listaCamiones
      */
