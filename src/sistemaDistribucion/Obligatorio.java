@@ -261,13 +261,14 @@ public class Obligatorio  implements IObligatorio{
                 //TODO: agregar pedido
             }
 
-            if(cajaAuxNL == null && cantRestante != 0) {
-                Envio pEspera = new Envio(rutCliente, cantRestante, codProducto, matriculaCam);
-                NodoLista EsperaNL = new NodoLista(pEspera);
-                pEncontrado.getListaEspera().encolar(EsperaNL);                    
-            }            
-            
         }
+        
+        if(cajaAuxNL == null && cantRestante != 0) {
+            Envio pEspera = new Envio(rutCliente, cantRestante, codProducto, matriculaCam);
+            NodoLista EsperaNL = new NodoLista(pEspera);
+            pEncontrado.getListaEspera().encolar(EsperaNL);                    
+        }            
+
         
         int enviado = cant - cantRestante;
         if(enviado != 0) {
