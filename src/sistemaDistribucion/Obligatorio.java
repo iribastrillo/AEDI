@@ -66,17 +66,28 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno eliminarCliente(String rut) {
-        Cliente cliente = new Cliente (rut);
-        NodoLista nodo = new NodoLista(cliente);
-        NodoLista nodoCliente = this.getS().getListaClientes().obtenerElemento(nodo);
         
-        if (nodoCliente == null) {
+        NodoLista borrarClienteNL = new NodoLista(null);
+
+        NodoLista primerClienteNL = this.getS().getListaClientes().getInicio();
+        
+        while(primerClienteNL != null && borrarClienteNL.getDato() == null) {
+            Cliente primerCliente = (Cliente)primerClienteNL.getDato();
+
+            if(primerCliente.getRut() == rut) {
+                borrarClienteNL = primerClienteNL;
+            }
+            primerClienteNL = primerClienteNL.getSig();
+        }
+        
+        if (borrarClienteNL.getDato() == null) {
             return new Retorno (Retorno.Resultado.ERROR_1);
         }
-        if (this.getS().tieneEntregas(cliente) || this.getS().tieneEspera(cliente)) {
+            Cliente borrarCliente = (Cliente)borrarClienteNL.getDato();
+        if (this.getS().tieneEntregas(borrarCliente) || this.getS().tieneEspera(borrarCliente)) {
             return new Retorno (Retorno.Resultado.ERROR_2);
         }
-        this.getS().getListaClientes().borrarElemento(nodo);
+        this.getS().getListaClientes().borrarElemento(borrarClienteNL);
         return new Retorno (Retorno.Resultado.OK);
     }
 
