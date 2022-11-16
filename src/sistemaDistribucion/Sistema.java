@@ -90,6 +90,27 @@ public class Sistema {
         return false;
     }
     
+    public boolean tieneEspera(Cliente cliente) {
+        NodoLista productoInicialNL = this.listaProductos.getInicio();
+        if(productoInicialNL == null) {
+            return false;
+        }
+        
+        while(productoInicialNL != null) {
+            Producto productoActual = (Producto) productoInicialNL.getDato();
+            NodoLista esperaInicialNL = productoActual.getListaEspera().getInicio();
+            while(esperaInicialNL != null) {
+                Envio esperaActual = (Envio) esperaInicialNL.getDato();
+                if(esperaActual.getRut().compareTo(cliente.getRut()) == 0) {
+                    return true;
+                }
+                esperaInicialNL = esperaInicialNL.getSig();
+            }
+            productoInicialNL = productoInicialNL.getSig();
+        }
+        return false;
+    }
+    
     
     public boolean tieneEntregas(Camion camion) {
 
@@ -113,6 +134,28 @@ public class Sistema {
         return false;
     }
 
+    public boolean tieneEspera(Camion camion) {
+
+        NodoLista productoInicialNL = this.listaProductos.getInicio();
+        if(productoInicialNL == null) {
+            return false;
+        }
+        
+        while(productoInicialNL != null) {
+            Producto productoActual = (Producto) productoInicialNL.getDato();
+            NodoLista esperaInicialNL = productoActual.getListaEspera().getInicio();
+            while(esperaInicialNL != null) {
+                Envio envioActual = (Envio) esperaInicialNL.getDato();
+                if(envioActual.getMatricula().compareTo(camion.getMatricula()) == 0) {
+                    return true;
+                }
+                esperaInicialNL = esperaInicialNL.getSig();
+            }
+            productoInicialNL = productoInicialNL.getSig();
+        }
+        return false;
+    }
+    
     /**
      * @return the listaProductos
      */

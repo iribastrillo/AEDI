@@ -71,7 +71,7 @@ public class Obligatorio  implements IObligatorio{
         if (nodoCliente == null) {
             return new Retorno (Retorno.Resultado.ERROR_1);
         }
-        if (this.getS().tieneEntregas(cliente)) {
+        if (this.getS().tieneEntregas(cliente) || this.getS().tieneEspera(cliente)) {
             return new Retorno (Retorno.Resultado.ERROR_2);
         }
         this.getS().getListaClientes().borrarElemento(nodo);
@@ -107,7 +107,7 @@ public class Obligatorio  implements IObligatorio{
         if(aux == null) {
             return new Retorno(Retorno.Resultado.ERROR_1);
         }
-        if(getS().tieneEntregas(c)){
+        if(this.getS().tieneEntregas(c) || this.getS().tieneEspera(c)){
             return new Retorno(Retorno.Resultado.ERROR_2);
         }
         this.getS().getListaCamiones().borrarElemento(aux);
