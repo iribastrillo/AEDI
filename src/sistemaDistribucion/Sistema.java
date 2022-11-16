@@ -98,7 +98,7 @@ public class Sistema {
         
         while(productoInicialNL != null) {
             Producto productoActual = (Producto) productoInicialNL.getDato();
-            NodoLista esperaInicialNL = productoActual.getListaEspera().getInicio();
+            NodoLista esperaInicialNL = productoActual.getEspera().getInicio();
             while(esperaInicialNL != null) {
                 Envio esperaActual = (Envio) esperaInicialNL.getDato();
                 if(esperaActual.getRut().compareTo(cliente.getRut()) == 0) {
@@ -143,7 +143,7 @@ public class Sistema {
         
         while(productoInicialNL != null) {
             Producto productoActual = (Producto) productoInicialNL.getDato();
-            NodoLista esperaInicialNL = productoActual.getListaEspera().getInicio();
+            NodoLista esperaInicialNL = productoActual.getEspera().getInicio();
             while(esperaInicialNL != null) {
                 Envio envioActual = (Envio) esperaInicialNL.getDato();
                 if(envioActual.getMatricula().compareTo(camion.getMatricula()) == 0) {
@@ -267,7 +267,7 @@ public class Sistema {
             if (producto.getCodigo() == codProd) {
                 System.out.print (producto);
                 System.out.println("");
-                producto.getListaEspera().mostrarCola();
+                producto.getEspera().mostrarCola();
             }
             nodoProducto = nodoProducto.getSig();
         }

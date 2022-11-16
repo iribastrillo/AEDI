@@ -17,7 +17,7 @@ public class Producto implements Comparable<Producto> {
     private int codigo;
     private String nombre;
     private String descripcion;
-    private Cola listaEspera;
+    private Cola Espera;
     private Cola cajas;
     private Cola envios;
 
@@ -25,7 +25,7 @@ public class Producto implements Comparable<Producto> {
         this.codigo = codigoSig;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.listaEspera = new Cola();
+        this.Espera = new Cola();
         this.cajas = new Cola();
         this.envios = new Cola();
         codigoSig++;
@@ -121,15 +121,15 @@ public class Producto implements Comparable<Producto> {
     /**
      * @return the listaEspera
      */
-    public Cola getListaEspera() {
-        return listaEspera;
+    public Cola getEspera() {
+        return Espera;
     }
 
     /**
      * @param listaEspera the listaEspera to set
      */
-    public void setListaEspera(Cola listaEspera) {
-        this.listaEspera = listaEspera;
+    public void setEspera(Cola listaEspera) {
+        this.Espera = listaEspera;
     }
         /**
      * @return the envios

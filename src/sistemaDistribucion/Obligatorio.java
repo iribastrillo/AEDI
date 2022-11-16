@@ -52,6 +52,8 @@ public class Obligatorio  implements IObligatorio{
         Cliente c = new Cliente(nombre,rut,tel,direccion);
         NodoLista cl = new NodoLista(c);
         
+        
+        
         if(getS().getListaClientes().esVacia()) {
             getS().getListaClientes().agregarInicio(cl);
         } else if(getS().getListaClientes().pertenece(c)){
@@ -179,7 +181,7 @@ public class Obligatorio  implements IObligatorio{
 
         this.getS().disminuirEspacio();          
         
-        NodoLista pEsperaNL = p.getListaEspera().getInicio();
+        NodoLista pEsperaNL = p.getEspera().getInicio();
         while(pEsperaNL != null && cantUnidades != 0) {
             
             Envio pEsperaActual = (Envio) pEsperaNL.getDato();
@@ -190,11 +192,11 @@ public class Obligatorio  implements IObligatorio{
                 cantUnidades = 0;
             } else if(pEsperaActual.getCantidad()== cantUnidades) {
                 this.retiroDeProducto(pEsperaActual.getMatricula(), pEsperaActual.getRut(), pEsperaActual.getCod(), cantUnidades);
-                p.getListaEspera().desencolar();
+                p.getEspera().desencolar();
                 cantUnidades = 0;
             } else if(pEsperaActual.getCantidad() < cantUnidades) {
                 this.retiroDeProducto(pEsperaActual.getMatricula(), pEsperaActual.getRut(), pEsperaActual.getCod(), pEsperaActual.getCantidad());
-                p.getListaEspera().desencolar();
+                p.getEspera().desencolar();
                 cantUnidades = cantUnidades - pEsperaActual.getCantidad();
             }
             pEsperaNL = pEsperaNL.getSig();
@@ -266,7 +268,7 @@ public class Obligatorio  implements IObligatorio{
         if(cajaAuxNL == null && cantRestante != 0) {
             Envio pEspera = new Envio(rutCliente, cantRestante, codProducto, matriculaCam);
             NodoLista EsperaNL = new NodoLista(pEspera);
-            pEncontrado.getListaEspera().encolar(EsperaNL);                    
+            pEncontrado.getEspera().encolar(EsperaNL);                    
         }            
 
         
