@@ -331,7 +331,20 @@ public class Obligatorio  implements IObligatorio{
 
     @Override
     public Retorno listarEnvíosDeProducto(int codProd) {
-        return new Retorno(Retorno.Resultado.NO_IMPLEMENTADA);
+        Producto p = new Producto(codProd);
+        NodoLista pNL = new NodoLista(p);
+        NodoLista prodNL = this.getS().getListaProductos().obtenerElemento(pNL);
+        
+        if(prodNL == null) {
+            return new Retorno(Retorno.Resultado.ERROR_1);
+        }
+        Producto producto = (Producto) prodNL.getDato();
+        Cola colaEnvios = producto.getEnvios();
+        
+        colaEnvios.mostrarREC(colaEnvios.frente());
+        return new Retorno(Retorno.Resultado.OK);
+        
+        
     }
 
     @Override
