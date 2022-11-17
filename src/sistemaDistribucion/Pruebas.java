@@ -154,19 +154,7 @@ public class Pruebas {
         Cod. Prod: 6      1        0       0      0
         Cod. Prod: 7      0        0       0      0
          */
-    }
-    
-    public void pruebasGonzalo(Obligatorio s, Prueba p) {
-        System.out.println("------------------------------");
-        System.out.println("----------Gonzalo-Inicio---------");
-
-        p.ver(this.s.listarOrdenesPendientes(3).resultado, Retorno.Resultado.OK, "");
-        p.ver(this.s.altaDeStockDeProducto("MEC4452", 3, 111120, 5).resultado, Retorno.Resultado.OK, "");
-        p.ver(this.s.listarOrdenesPendientes(3).resultado, Retorno.Resultado.OK, "");
-        System.out.println("----------Gonzalo-fin------------");
-
-    }
-    
+    } 
     public void probar () {
         this.pruebasCreacionSistema_1(this.s, new Prueba());
         this.pruebasRegistroClientes(this.s, new Prueba());
@@ -176,6 +164,5 @@ public class Pruebas {
         this.pruebasRetiroDeProducto(this.s, new Prueba());
         this.pruebasDeReporteDeEnviosXProducto(this.s, new Prueba ());
         this.pruebasDeBaja(this.s, new Prueba ());
-       // this.pruebasGonzalo(this.s, new Prueba());
     }
 }
