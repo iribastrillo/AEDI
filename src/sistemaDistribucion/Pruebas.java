@@ -137,12 +137,12 @@ public class Pruebas {
         p.ver(this.s.listarClientesOrdenado().resultado, Retorno.Resultado.OK, "Se listan 4 clientes");
         
         p.ver(this.s.listarEnvíosDeProducto(1).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 1");
-        p.ver(this.s.listarEnvíosDeProducto(2).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 1");
-        p.ver(this.s.listarEnvíosDeProducto(3).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 1");
-        p.ver(this.s.listarEnvíosDeProducto(4).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 1");
-        p.ver(this.s.listarEnvíosDeProducto(5).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 1");
-        p.ver(this.s.listarEnvíosDeProducto(6).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 1");
-        p.ver(this.s.listarEnvíosDeProducto(7).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 1");
+        p.ver(this.s.listarEnvíosDeProducto(2).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 2");
+        p.ver(this.s.listarEnvíosDeProducto(3).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 3");
+        p.ver(this.s.listarEnvíosDeProducto(4).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 4");
+        p.ver(this.s.listarEnvíosDeProducto(5).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 5");
+        p.ver(this.s.listarEnvíosDeProducto(6).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 6");
+        p.ver(this.s.listarEnvíosDeProducto(7).resultado,Retorno.Resultado.OK, "Se listan los envios del producto 7");
 
     }
 
